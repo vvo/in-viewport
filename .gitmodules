@@ -1,0 +1,6 @@
+[submodule "test/mocha"]
+	path = test/mocha
+	url = git://github.com/visionmedia/mocha.git
+[submodule "test/assert"]
+	path = test/assert
+	url = git://github.com/Jxck/assert.git

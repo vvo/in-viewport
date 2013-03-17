@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>has-scrolled tests</title>
+
+    <link rel="stylesheet" href="mocha/mocha.css"/>
+</head>
+<body>
+    <div id="mocha"></div>
+    <div id="playground"></div>
+
+    <script src="../has-scrolled.js"></script>
+
+    <script src="helper.js"></script>
+    <script src="assert/assert.js"></script>
+    <script src="mocha/mocha.js"></script>
+
+    <script>mocha.setup('bdd')</script>
+
+    <script src="simple.js"></script>
+
+    <script>
+        mocha.run();
+    </script>
+</body>
+</html>
