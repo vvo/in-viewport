@@ -1,4 +1,4 @@
-describe('asking if a div scrolled', function() {
+describe('asking if a visible div scrolled', function() {
   var playground = getPlayground();
   var scrolled = false;
 
