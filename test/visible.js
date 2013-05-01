@@ -3,16 +3,15 @@ describe('asking if a visible div scrolled', function() {
   var scrolled = false;
 
   before(function() {
-    insert(playground, '<div id=test></div>');
-    hasScrolled(document.getElementById('test'), function() {
+    insert(playground, '<div id=testVisible>am I visible or what?</div>');
+    hasScrolled(document.getElementById('testVisible'), function() {
       scrolled = true;
-    })
+    });
   });
 
-  it('should have called my callback', function() {
-    assert(scrolled);
+  it('callback called', function() {
+    assert(scrolled === true);
   });
 
   after(clean);
-
 });

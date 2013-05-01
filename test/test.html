@@ -1,27 +1,32 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>has-scrolled tests</title>
+  <meta charset="utf-8">
+  <title>has-scrolled tests</title>
 
-    <link rel="stylesheet" href="mocha/mocha.css"/>
+  <link rel="stylesheet" href="mocha/mocha.css"/>
 </head>
 <body>
-    <div id="mocha"></div>
-    <div id="playground"></div>
+  <div id="playground"></div>
+  <div id="mocha"></div>
 
-    <script src="../has-scrolled.js"></script>
+  <script src="../has-scrolled.js"></script>
 
-    <script src="helper.js"></script>
-    <script src="assert/assert.js"></script>
-    <script src="mocha/mocha.js"></script>
+  <script src="helper.js"></script>
+  <script src="assert/assert.js"></script>
+  <script src="mocha/mocha.js"></script>
 
-    <script>mocha.setup('bdd')</script>
+  <script>
+  mocha.setup({
+    ui: 'bdd',
+    reporter: Mocha.reporters.HTML
+  })</script>
 
-    <script src="visible.js"></script>
+  <script src="not-visible.js"></script>
+  <script src="visible.js"></script>
+  <script src="custom-container.js"></script>
+  <script>if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
+      else { mocha.run(); }</script>
 
-    <script>
-        mocha.run();
-    </script>
 </body>
 </html>
