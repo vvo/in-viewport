@@ -1,9 +1,9 @@
 (function(win, doc){
 
   var instances = [];
-  win["hasScrolled"] = hasScrolled;
+  win["inViewport"] = inViewport;
 
-  function hasScrolled(elt, params, cb) {
+  function inViewport(elt, params, cb) {
     var opts = {
       container: doc.body,
       offset: 0
@@ -19,27 +19,14 @@
 
     for (var i = 0; i < instances.length; i++) {
       if (instances[i].container === container) {
-        instances[i].scrolled(elt, offset, cb);
+        instances[i].inViewport(elt, offset, cb);
         return;
       }
     }
 
-    var newInstance = getScrolled(container);
+    var newInstance = createInViewport(container);
     instances.push(newInstance);
-    newInstance.scrolled(elt, offset, cb);
-  }
-
-  function partial(fn /*, args...*/) {
-    // A reference to the Array#slice method.
-    var slice = Array.prototype.slice;
-    // Convert arguments object to an array, removing the first argument.
-    var args = slice.call(arguments, 1);
-
-    return function() {
-      // Invoke the originally-specified function, passing in all originally-
-      // specified arguments, followed by any just-specified arguments.
-      return fn.apply(this, args.concat(slice.call(arguments, 0)));
-    };
+    newInstance.inViewport(elt, offset, cb);
   }
 
   function addEvent( el, type, fn ) {
@@ -47,15 +34,6 @@
       el.attachEvent && el.attachEvent( 'on' + type, fn );
     } else {
       el.addEventListener( type, fn, false );
-    }
-  }
-
-  // X-browser
-  function removeEvent( el, type, fn ) {
-    if (el.detachEvent) {
-      el.detachEvent && el.detachEvent( 'on' + type, fn );
-    } else {
-      el.removeEventListener( type, fn, false );
     }
   }
 
@@ -74,71 +52,67 @@
     }
   }
 
-  // as suggested by http://webreflection.blogspot.fr/2011/06/partial-polyfills.html
-  var indexOf = [].indexOf || function (value) {
-      for (var i = this.length; i-- && this[i] !== value;);
-      return i;
-  };
-
-  function getScrolled(container) {
+  function createInViewport(container) {
     var watches = [];
     var scrollContainer = container === doc.body ? win : container;
     var debouncedScrollCheck = debounce(scrollCheck, 12);
 
     addEvent(scrollContainer, 'scroll', debouncedScrollCheck);
 
-    function scrolled(elt, offset, cb) {
+    function inViewport(elt, offset, cb) {
       var eltRect = elt.getBoundingClientRect();
       var containerRect = container.getBoundingClientRect();
       var scrollEvent = arguments[3];
 
       var pos = {
-        x: eltRect.left - offset,
-        y: eltRect.top - offset
+        left: eltRect.left,
+        top: eltRect.top
       };
 
       var viewport = {
-        x: 0,
-        y: 0
+        width: 0,
+        height: 0
       };
 
       if (container === doc.body) {
-        viewport.x += doc.documentElement.clientWidth;
-        viewport.y += doc.documentElement.clientHeight;
+        viewport.width += doc.documentElement.clientWidth;
+        viewport.height += doc.documentElement.clientHeight;
       } else {
-        pos.x -= containerRect.left;
-        pos.y -= containerRect.top;
-        viewport.x += container.clientWidth;
-        viewport.y += container.clientHeight;
+        pos.left -= containerRect.left;
+        pos.top -= containerRect.top;
+        viewport.width += container.clientWidth;
+        viewport.height += container.clientHeight;
       }
 
-      var visible = pos.y <= viewport.y && pos.x <= viewport.x;
+      var visible =
+        pos.left >= -offset &&
+        pos.left <= viewport.width + offset &&
+        pos.top >= -offset &&
+        pos.top <= viewport.height + offset;
 
       if (visible) {
-        cb(true);
+        cb();
       } else {
-        if (!scrollEvent) {
-          cb(false);
-        }
-
         setTimeout(addWatch, 0);
       }
 
       function addWatch() {
-        watches.push(partial(scrolled, elt, offset, cb));
+        watches.push(function(/*scrollEvent = true*/) {
+          inViewport(elt, offset, cb, true);
+        });
       }
     }
 
     function scrollCheck() {
       var cb;
       while(cb = watches.shift()) {
-        cb(true);
+        cb();
       }
     }
 
     return {
       container: container,
-      scrolled: scrolled
+      inViewport: inViewport
     }
   }
 

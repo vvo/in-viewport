@@ -4,7 +4,7 @@ describe('asking if a visible div scrolled', function() {
 
   before(function() {
     insert(playground, '<div id=testVisible>am I visible or what?</div>');
-    hasScrolled(document.getElementById('testVisible'), function() {
+    inViewport(document.getElementById('testVisible'), function() {
       scrolled = true;
     });
   });

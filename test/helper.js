@@ -37,8 +37,8 @@
       scroll(x || 0, y || 0);
     } else {
       // tricky, on IE8 this will triggers TWO scroll events
-      container.scrollLeft += x;
-      container.scrollTop += y;
+      container.scrollLeft = x;
+      container.scrollTop = y;
     }
   }
 

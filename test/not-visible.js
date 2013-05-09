@@ -2,18 +2,13 @@ function testElem(x, y) {
   describe('dealing with an element located at '+x+','+y, function() {
     var $playground = getPlayground();
     var $test;
-    var results = [];
+    var calls = [];
 
     before(function() {
       var position = 'position:relative;top:' + y + 'px;left:' + x + 'px';
-      insert($playground, '<div id=testNotVisible style=' + position + ';width:10px;height:100px>t</div>');
+      insert($playground, '<div id=testNotVisible style=' + position + ';width:10px;height:100px>t</div><div class="scrollTrigger"></div>');
       $test = document.getElementById('testNotVisible');
-      hasScrolled($test, cb);
-    });
-
-    it('cb was called', function() {
-      assert(results[0] === false, 'Element marked as visible when not visible');
-      assert(results.length === 1, 'Too much callbacks');
+      inViewport($test, cb);
     });
 
     describe('when we scroll down a little', function() {
@@ -21,18 +16,25 @@ function testElem(x, y) {
 
       it('callback was not called', function() {
         assert(
-          results.length === 1,
+          calls.length === 0,
           'Callback unnecessarily called'
         );
       });
     });
 
-    describe('when we scroll down to the element', function() {
+    describe('when we scroll down too far', function() {
+      before(scroller(x * 2, y * 2));
+
+      it('callback is not called', function() {
+        assert(calls.length === 0, 'Callback unnecessarily called');
+      });
+    });
+
+    describe('when we scroll to the element', function() {
       before(scroller(x, y));
 
       it('callback was called', function() {
-        assert(results[1] === true, 'Element is visible');
-        assert(results.length === 2, 'We only got two cb');
+        assert(calls.length === 1, 'We got the inViewport callback');
       });
     });
 
@@ -42,12 +44,12 @@ function testElem(x, y) {
       before(scroller(0, 0));
 
       it('no more callback called', function() {
-        assert(results.length === 2, 'Too much callback');
+        assert(calls.length === 1, 'Too much callback');
       });
     });
 
     function cb(result) {
-      results.push(result);
+      calls.push(result);
     }
 
   });

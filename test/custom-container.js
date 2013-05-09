@@ -2,11 +2,11 @@ describe('using a div as a reference container', function() {
   var $playground = getPlayground();
   var $test;
   var $container;
-  var results = [];
+  var calls = [];
 
   before(function() {
     var tofind =
-      '<div id=testCustom style=position:relative;width:10px;height:10px;top:1000px;left:1000px>t</div>';
+      '<div id=testCustom style=position:relative;width:10px;height:10px;top:1000px;left:1000px>coucou</div><div class="scrollTrigger"></div>';
     var container =
       '<div id=container style=width:500px;height:500px;overflow:scroll> ' + tofind + '</div>';
     var fakeBodyScroller =
@@ -16,14 +16,9 @@ describe('using a div as a reference container', function() {
 
     $test = document.getElementById('testCustom');
     $container = document.getElementById('container');
-    hasScrolled($test, {
+    inViewport($test, {
       container: $container
     }, scrolledCb);
-  });
-
-  it('cb was called', function() {
-    assert(results[0] === false, 'Element marked as visible when not visible');
-    assert(results.length === 1, 'Too much callbacks');
   });
 
   describe('when we scroll down on body', function() {
@@ -31,7 +26,7 @@ describe('using a div as a reference container', function() {
 
     it('callback was not called', function() {
       assert(
-        results.length === 1,
+        calls.length === 0,
         'Callback unnecessarily called'
       );
     });
@@ -46,7 +41,20 @@ describe('using a div as a reference container', function() {
 
     it('callback was not called', function() {
       assert(
-        results.length === 1,
+        calls.length === 0,
+        'Callback unnecessarily called'
+      );
+    });
+  });
+
+  describe('when we scroll down too far in the container', function() {
+    before(function(cb) {
+      scroller(10000, 10000, $container, cb);
+    });
+
+    it('callback was not called', function() {
+      assert(
+        calls.length === 0,
         'Callback unnecessarily called'
       );
     });
@@ -58,8 +66,7 @@ describe('using a div as a reference container', function() {
     });
 
     it('callback was called', function() {
-      assert(results[1] === true, 'Element is visible');
-      assert(results.length === 2, 'We only got two cb');
+      assert(calls.length === 1, 'We got the inViewport callback');
     });
   });
 
@@ -73,12 +80,12 @@ describe('using a div as a reference container', function() {
     before(scroller(0, 0));
 
     it('no more callback called', function() {
-      assert(results.length === 2, 'Too much callback');
+      assert(calls.length === 1, 'Too much callback');
     });
   });
 
   function scrolledCb(result) {
-    results.push(result);
+    calls.push(result);
   }
 
   after(clean);
