@@ -31,7 +31,7 @@
 
   function addEvent( el, type, fn ) {
     if (el.attachEvent) {
-      el.attachEvent && el.attachEvent( 'on' + type, fn );
+      el.attachEvent( 'on' + type, fn );
     } else {
       el.addEventListener( type, fn, false );
     }
@@ -62,7 +62,6 @@
     function inViewport(elt, offset, cb) {
       var eltRect = elt.getBoundingClientRect();
       var containerRect = container.getBoundingClientRect();
-      var scrollEvent = arguments[3];
 
       var pos = {
         left: eltRect.left,
@@ -97,7 +96,7 @@
       }
 
       function addWatch() {
-        watches.push(function(/*scrollEvent = true*/) {
+        watches.push(function() {
           inViewport(elt, offset, cb, true);
         });
       }
