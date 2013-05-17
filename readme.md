@@ -94,7 +94,7 @@ You get a `build/in-viewport.min.js` file.
 
 `compiler.jar` is [google closure compiler](https://code.google.com/p/closure-compiler/downloads/list) .jar location.
 
-## Licence
+## License
 
 Copyright (c) 2013 Vincent Voyer
 

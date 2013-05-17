@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     concat: {
       license: {
         options: {
-          banner: '/*! <%= pkg.name %> v<%= pkg.version %> | github.com/vvo/in-viewport#licence */\n'
+          banner: '/*! <%= pkg.name %> v<%= pkg.version %> | github.com/vvo/in-viewport#license */\n'
         },
         src:  ['build/<%= pkg.name %>.min.js'],
         dest: 'build/<%= pkg.name %>.min.js'
