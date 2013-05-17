@@ -54,18 +54,65 @@ function visible() {
 If the element is near `offset` pixels of the viewport then you get
 your callback.
 
-## Tests
+## Testing
 
-Tested on IE8/9 and modern browsers.
+Tested on IE8/9 and modern browsers, using [mocha](https://github.com/visionmedia/mocha).
 
-Open test/test.html or use a headless browser:
+Open `test/test.html` or use a headless browser:
 
-```js
-cd in-viewport
+```bash
 npm install -g mocha-phantomjs phantomjs
-mocha-phantomjs test/test.html
+npm test
 ```
 
-## Minifying
+## Hacking
 
-Can be minified using google closure compiler advanced mode.
+You need package.json dependencies and grunt.
+
+```bash
+npm install
+npm install -g grunt-cli
+grunt watch
+```
+
+Start an http-server in root dir:
+
+```bash
+npm install http-server -g
+http-server
+```
+
+Open `test/test.html`, code, test, GOTO code.
+
+## Building
+
+```bash
+CLOSURE_PATH="~/path/to/compiler.jar" grunt
+```
+
+You get a `build/in-viewport.min.js` file.
+
+`compiler.jar` is [google closure compiler](https://code.google.com/p/closure-compiler/downloads/list) .jar location.
+
+## Licence
+
+Copyright (c) 2013 Vincent Voyer
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
