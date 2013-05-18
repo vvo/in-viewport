@@ -18,15 +18,13 @@
     "grunt-closure-compiler": "git://github.com/vvo/grunt-closure-compiler.git#v0.1.0",
     "grunt-contrib-watch": "~0.4.3",
     "grunt-contrib-jshint": "~0.4.3",
-    "mocha": "~1.9.0",
-    "assert": "git://github.com/Jxck/assert.git"
+    "mocha": "~1.9.0"
   },
   "testling": {
     "scripts": [
-      "test/helper.js",
-      "node_modules/assert/assert.js",
+      "test/helpers/*.js",
       "in-viewport.js",
-      "test/not-visible.js"
+      "test/*.js"
     ],
     "harness": "mocha-bdd",
     "browsers": {
