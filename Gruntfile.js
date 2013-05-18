@@ -24,13 +24,13 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ['<%= pkg.name %>.js'],
+      files: ['<%= pkg.name %>.js', 'package.json'],
       options: {
         jshintrc: '.jshintrc'
       }
     },
     watch: {
-      files: ['<%= jshint.files %>', '.jshintrc'],
+      files: ['<%= jshint.files %>', '.jshintrc', 'package.json'],
       tasks: ['jshint']
     }
   });
@@ -39,6 +39,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-notify');
 
   // Default task.
   grunt.registerTask('default', [
