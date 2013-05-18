@@ -22,7 +22,7 @@
   "testling": {
     "scripts": [
       "tests/helper.js",
-      "in-viewport.js",
+      "in-viewport.js"
     ],
     "files": "test/not-visible.js",
     "harness" : "mocha-bdd",
