@@ -14,6 +14,8 @@ Use cases:
 * loading widgets only when needed
 * your ideas
 
+[![browser support](https://ci.testling.com/vvo/in-viewport.png)](https://ci.testling.com/vvo/in-viewport)
+
 ## Simple usage
 
 ```js
@@ -55,8 +57,6 @@ If the element is near `offset` pixels of the viewport then you get
 your callback.
 
 ## Testing
-
-Tested on IE8/9 and modern browsers, using [mocha](https://github.com/visionmedia/mocha).
 
 Open `test/test.html` or use a headless browser:
 
