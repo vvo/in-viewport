@@ -1,3 +1,0 @@
-[submodule "test/assert"]
-	path = test/assert
-	url = git://github.com/Jxck/assert.git
