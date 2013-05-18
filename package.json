@@ -18,5 +18,16 @@
     "grunt-closure-compiler": "git://github.com/vvo/grunt-closure-compiler.git#v0.1.0",
     "grunt-contrib-watch": "~0.4.3",
     "grunt-contrib-jshint": "~0.4.3"
+  },
+  "testling": {
+    "scripts": [
+      "tests/helper.js",
+      "in-viewport.js",
+    ],
+    "files": "test/not-visible.js",
+    "harness" : "mocha-bdd",
+    "browsers": {
+      "chrome": [ 35 ]
+    }
   }
 }
