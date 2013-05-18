@@ -21,13 +21,13 @@
   },
   "testling": {
     "scripts": [
-      "tests/helper.js",
+      "test/helper.js",
       "in-viewport.js"
+      "test/not-visible.js"
     ],
-    "files": "test/not-visible.js",
     "harness" : "mocha-bdd",
     "browsers": {
-      "chrome": [ 35 ]
+      "chrome": [ 25 ]
     }
   }
 }
