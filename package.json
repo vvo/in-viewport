@@ -17,7 +17,8 @@
     "grunt-contrib-concat": "~0.3.0",
     "grunt-closure-compiler": "git://github.com/vvo/grunt-closure-compiler.git#v0.1.0",
     "grunt-contrib-watch": "~0.4.3",
-    "grunt-contrib-jshint": "~0.4.3"
+    "grunt-contrib-jshint": "~0.4.3",
+    "mocha": "~1.9.0"
   },
   "testling": {
     "scripts": [
@@ -25,9 +26,11 @@
       "in-viewport.js",
       "test/not-visible.js"
     ],
-    "harness" : "mocha-bdd",
+    "harness": "mocha-bdd",
     "browsers": {
-      "chrome": [ 25 ]
+      "chrome": [
+        25
+      ]
     }
   }
 }
