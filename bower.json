@@ -1,0 +1,10 @@
+{
+  "name": "in-viewport",
+  "version": "0.1.0",
+  "main": "build/in-viewport.min.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}
