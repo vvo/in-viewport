@@ -28,9 +28,14 @@
     ],
     "harness": "mocha-bdd",
     "browsers": {
-      "chrome": [
-        25
-      ]
+      "ie": [8, 9, 10],
+      "chrome": [24, 25],
+      "firefox": [18, 19],
+      "opera": [12],
+      "safari": [5.1, 6.0],
+      "iphone": [6.0],
+      "ipad": [6.0],
+      "android-browser": [4.2]
     }
   }
 }
