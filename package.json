@@ -24,7 +24,7 @@
   "testling": {
     "scripts": [
       "test/helper.js",
-      "test/assert/assert.js",
+      "node_modules/assert/assert.js",
       "in-viewport.js",
       "test/not-visible.js"
     ],
