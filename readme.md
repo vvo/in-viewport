@@ -1,60 +1,75 @@
 # inViewport
 
-Get a callback when an element enters the viewport (body) or a custom viewport.
-
-If your element was close to the viewport for more than 12ms then we decide it's visible
-in the viewport.
-
-It means, if you scroll very fast on webpages and registered for some inViewport callbacks,
-you only get the relevant ones.
-
-Use cases:
-* lazyloader (images, iframes)
-* infinite scroll
-* loading widgets only when needed
-* your ideas
+Know when an element is in the window viewport or a custom viewport.
 
 [![browser support](https://ci.testling.com/vvo/in-viewport.png)](https://ci.testling.com/vvo/in-viewport)
 
-## Simple usage
+## Usage
+
+### Immediate result
 
 ```js
-var elem = document.getElementById('myfancyDiv')
+var elem = document.getElementById('myFancyDiv');
+
+var isInViewport = inViewport(elem); // returns `true` or `false`
+
+alert('myFancyDiv is ' + isInViewport ? 'visible' : 'not visible' + ' in the window');
+```
+
+### Using a callback
+
+We watch for your element to enters the viewport and call your callback when it does.
+
+```js
+var elem = document.getElementById('myFancyDiv');
 
 inViewport(elem, visible);
 
 function visible() {
-  alert('myfancyDiv is visible !');
+  alert('myFancyDiv is visible in the window !');
 }
 ```
 
-`visible` will only get called when the element is visible in the viewport.
+### A custom container
 
-We are watching the `scroll` event on `document.body` to know when your element is visible.
-
-## Advanced usage
-
-The default reference container (`document.body`) can be changed to match your needs.
-If you have a div with a scrollbar, you can ask for `inViewport` on his children.
+By default, we use the current window as the reference viewport.
+But you can also specify another element as a reference viewport.
 
 ```js
-var nested = document.getElementById('myNestedDiv');
-var options = {
-  container: document.getElementById('container'),
-  offset: 100
-}
+var customContainer = document.getElementById('myFancyContainer');
+var elem = document.getElementById('myFancyDiv');
 
-inViewport(nested, options, visible);
+inViewport(elem, { container: customContainer }, visible);
 
 function visible() {
-  alert('myNestedDiv is visible !');
+  alert('myfancyDiv is visible in the `customContainer` !');
 }
 ```
 
-`offset` is a length in pixels.
+### Specifying an offset
 
-If the element is near `offset` pixels of the viewport then you get
-your callback.
+By default, when your element precisely enters the viewport, you get a callback / true result.
+But maybe you want to know when your element is soon to be shown in the viewport.
+Use an `offset` param for that !
+
+```js
+var elem = document.getElementById('myFancyDiv');
+
+inViewport(elem, { offset: 300 }, visible);
+
+function visible() {
+  alert('myfancyDiv is visible in the `customContainer` !');
+}
+```
+
+When your element is near `300px` of the viewport, you get your callback / true result.
+
+## Use cases
+
+* lazyloader (images, iframes)
+* infinite scroll
+* loading widgets only when needed
+* your ideas
 
 ## Testing
 
