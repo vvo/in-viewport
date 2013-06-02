@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://github.com/vvo/in-viewport.git"
   },
-  "author": "Vincent Voyer <vincent.voyer@gmail.com>",
+  "author": "Vincent Voyer <vincent.voyer@gmail.com> (http://github.com/vvo)",
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.1",
