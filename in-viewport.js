@@ -9,7 +9,7 @@
       offset: 0
     };
 
-    if (typeof params === 'function') {
+    if (params === undefined || typeof params === 'function') {
       cb = params;
       params = {};
     }
@@ -19,14 +19,13 @@
 
     for (var i = 0; i < instances.length; i++) {
       if (instances[i].container === container) {
-        instances[i].inViewport(elt, offset, cb);
-        return;
+        return instances[i].inViewport(elt, offset, cb);
       }
     }
 
     var newInstance = createInViewport(container);
     instances.push(newInstance);
-    newInstance.inViewport(elt, offset, cb);
+    return newInstance.inViewport(elt, offset, cb);
   }
 
   function addEvent( el, type, fn ) {
@@ -90,9 +89,17 @@
         pos.top <= viewport.height + offset;
 
       if (visible) {
-        cb();
+        if (cb) {
+          cb();
+        } else {
+          return true;
+        }
       } else {
-        setTimeout(addWatch, 0);
+        if (cb) {
+          setTimeout(addWatch, 0);
+        } else {
+          return false;
+        }
       }
 
       function addWatch() {
