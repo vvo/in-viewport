@@ -96,13 +96,15 @@
         }
       } else {
         if (cb) {
-          setTimeout(addWatch, 0);
+          setTimeout(addWatch(elt, offset, cb), 0);
         } else {
           return false;
         }
       }
+    }
 
-      function addWatch() {
+    function addWatch(elt, offset, cb) {
+      return function() {
         watches.push(function() {
           inViewport(elt, offset, cb, true);
         });
