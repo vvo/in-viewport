@@ -54,7 +54,7 @@
   function createInViewport(container) {
     var watches = [];
     var scrollContainer = container === doc.body ? win : container;
-    var debouncedScrollCheck = debounce(scrollCheck, 12);
+    var debouncedScrollCheck = debounce(scrollCheck, 25);
 
     addEvent(scrollContainer, 'scroll', debouncedScrollCheck);
 
