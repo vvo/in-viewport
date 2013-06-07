@@ -1,10 +1,10 @@
 describe('asking if a visible div scrolled', function() {
-  var playground = getPlayground();
   var scrolled = false;
+  var test = createTest();
 
   before(function() {
-    insert(playground, '<div id=testVisible>am I visible or what?</div>');
-    inViewport(document.getElementById('testVisible'), function() {
+    insertTest(test);
+    inViewport(test, function() {
       scrolled = true;
     });
   });
@@ -13,5 +13,5 @@ describe('asking if a visible div scrolled', function() {
     assert(scrolled === true);
   });
 
-  after(clean);
+  after(clean(test));
 });

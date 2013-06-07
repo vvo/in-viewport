@@ -8,7 +8,10 @@
 
 </head>
 <body>
+<!--   <div id="testNotVisible" style="position:relative;top:10000px;left:0px;width:10px;height:100px">t</div> -->
   <div id="mocha"></div>
+  <!-- <div id="playground">
+  </div> -->
 
   <script src="../in-viewport.js"></script>
 
@@ -19,7 +22,7 @@
   <script>
   mocha.setup({
     ui: 'bdd',
-    reporter: Mocha.reporters.HTML
+    reporter: Mocha.reporters.TAP
   })</script>
 
   <script src="not-visible.js"></script>
