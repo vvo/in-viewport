@@ -45,13 +45,13 @@
     if (typeof cb === 'function') {
       setTimeout(function() {
         smartScroll(x, y, container);
-        setTimeout(cb, 25);
+        setTimeout(cb, 100);
       }, 4);
     } else {
       return function(cb) {
         setTimeout(function() {
           smartScroll(x, y, container);
-          setTimeout(cb, 25);
+          setTimeout(cb, 100);
         }, 4);
       }
     }
