@@ -20,8 +20,13 @@
     params = params || {};
 
     var test = document.createElement(params.tagName || 'div');
-    for(var name in params.style) {
-      test.style[name] = params.style[name];
+
+    for (var attr in params.attributes) {
+      test.setAttribute(attr, params.attributes[attr]);
+    }
+
+    for(var prop in params.style) {
+      test.style[prop] = params.style[prop];
     }
 
     return test;
@@ -54,6 +59,13 @@
           setTimeout(cb, 100);
         }, 4);
       }
+    }
+  }
+
+  win['wait'] = function wait(ms) {
+
+    return function(done) {
+      setTimeout(done, ms);
     }
   }
 
