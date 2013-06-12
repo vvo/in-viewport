@@ -25,7 +25,7 @@ describe('using offsets', function() {
 
       describe('when we scroll down a little too low (' + (scrollTo-1) + 'px)', function() {
 
-        before(scroller(0, scrollTo - 1));
+        before(scroller(0, scrollTo - 5));
 
         it('callback was not called', function() {
           assert(
