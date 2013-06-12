@@ -3,8 +3,8 @@ describe('using offsets', function() {
     describe(offset+' offset with an element at '+x+','+y, function() {
       var test = createTest({
         style: {
-          width: 0,
-          height: 0,
+          width: '1px',
+          height: '1px',
           position: 'relative',
           left: x +  'px',
           top: y + 'px'
@@ -25,7 +25,7 @@ describe('using offsets', function() {
 
       describe('when we scroll down a little too low (' + (scrollTo-1) + 'px)', function() {
 
-        before(scroller(0, scrollTo - 5));
+        before(scroller(0, scrollTo - 20));
 
         it('callback was not called', function() {
           assert(
