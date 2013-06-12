@@ -6,6 +6,8 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "components"
+    "components",
+    "test/*.js",
+    "test/*.html"
   ]
 }
