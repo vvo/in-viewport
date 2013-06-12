@@ -51,8 +51,8 @@
         smartScroll(x - 1, y - 1, container);
         setTimeout(function() {
           smartScroll(x, y, container);
-          setTimeout(cb, 35);
-        }, 35);
+          setTimeout(cb, 70);
+        }, 70);
       }, 4);
     } else {
       return function(cb) {
@@ -60,8 +60,8 @@
           smartScroll(x - 1, y - 1, container);
           setTimeout(function() {
             smartScroll(x, y, container);
-            setTimeout(cb, 35);
-          }, 35);
+            setTimeout(cb, 70);
+          }, 70);
         }, 4);
       }
     }
