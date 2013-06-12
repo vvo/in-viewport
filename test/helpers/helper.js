@@ -1,5 +1,4 @@
 (function(win, doc){
-
   scroll(0, 0);
   var playground = document.createElement('div');
   playground.id = 'playground';
@@ -50,13 +49,13 @@
     if (typeof cb === 'function') {
       setTimeout(function() {
         smartScroll(x, y, container);
-        setTimeout(cb, 300);
+        setTimeout(cb, 70);
       }, 4);
     } else {
       return function(cb) {
         setTimeout(function() {
           smartScroll(x, y, container);
-          setTimeout(cb, 300);
+          setTimeout(cb, 70);
         }, 4);
       }
     }
