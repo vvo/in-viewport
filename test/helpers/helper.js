@@ -16,7 +16,7 @@
   }
   document.getElementsByTagName("head")[0].appendChild(style);
 
-  win['createTest'] = function createTest(params) {
+  win.createTest = function createTest(params) {
     params = params || {};
 
     var test = document.createElement(params.tagName || 'div');
@@ -32,12 +32,12 @@
     return test;
   }
 
-  win['insertTest'] = function insertTest(test, parent) {
+  win.insertTest = function insertTest(test, parent) {
     parent = parent || playground;
     parent.insertBefore(test, parent.childNodes[0]);
   }
 
-  win['clean'] = function clean(node, parent) {
+  win.clean = function clean(node, parent) {
     parent = parent || playground;
 
     return function() {
@@ -46,7 +46,7 @@
     }
   }
 
-  win['scroller'] = function scroller(x, y, container, cb) {
+  win.scroller = function scroller(x, y, container, cb) {
     if (typeof cb === 'function') {
       setTimeout(function() {
         smartScroll(x, y, container);
@@ -62,7 +62,7 @@
     }
   }
 
-  win['wait'] = function wait(ms) {
+  win.wait = function wait(ms) {
 
     return function(done) {
       setTimeout(done, ms);
