@@ -48,14 +48,20 @@
   win.scroller = function scroller(x, y, container, cb) {
     if (typeof cb === 'function') {
       setTimeout(function() {
-        smartScroll(x, y, container);
-        setTimeout(cb, 70);
+        smartScroll(x - 1, y - 1, container);
+        setTimeout(function() {
+          smartScroll(x, y, container);
+          setTimeout(cb, 35);
+        }, 35);
       }, 4);
     } else {
       return function(cb) {
         setTimeout(function() {
-          smartScroll(x, y, container);
-          setTimeout(cb, 70);
+          smartScroll(x - 1, y - 1, container);
+          setTimeout(function() {
+            smartScroll(x, y, container);
+            setTimeout(cb, 35);
+          }, 35);
         }, 4);
       }
     }
