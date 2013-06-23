@@ -1,8 +1,8 @@
 {
   "name": "in-viewport",
   "description": "Get a callback when an element enters the viewport",
-  "version": "0.2.5",
-  "main": "build/in-viewport.min.js",
+  "version": "0.2.6",
+  "main": "in-viewport.js",
   "ignore": [
     "**/.*",
     "node_modules",
