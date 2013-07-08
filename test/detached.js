@@ -35,5 +35,5 @@ describe('detached DOM node', function() {
     })
   });
 
-  // after(clean(test));
+  after(clean(test));
 });
