@@ -47,6 +47,38 @@ function visible() {
 }
 ```
 
+### Manual visibility check
+
+In [callback mode](#using-a-callback), inViewport checks for
+element visibility at scroll/resize events (debounced).
+
+When dealing with detached dom nodes registered
+to `inViewport` callback mode, you may want to force a
+manual visibility check on all elements even if
+no scroll/resize events occured.
+
+You can do this using `inViewport.check(container);`.
+
+Default container is `document.body`.
+
+```js
+// detached DOM node
+var elem = document.createElement('div');
+
+inViewport(elem, visible);
+
+document.body.insertBefore(elem, document.body.childNodes[0]);
+
+// since inViewport check is triggered on resize/scroll only
+// `visible` still not called, let's force a visibility check
+
+inViewport.check();
+
+function visible(elt) {
+  alert(elt.id + ' is visible in the window !');
+}
+```
+
 ### Specifying an offset
 
 By default, when your element precisely enters the viewport, you get a callback / true result.
