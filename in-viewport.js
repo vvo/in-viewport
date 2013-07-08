@@ -6,7 +6,7 @@
   var instances = [];
   var defaultContainer = doc.body;
 
-  win["inViewport"] = inViewport;
+  win['inViewport'] = inViewport;
 
   function inViewport(elt, params, cb) {
     var opts = {
