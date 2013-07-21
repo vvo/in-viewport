@@ -1,6 +1,6 @@
 describe('without using callbacks', function() {
 
-  describe('when image is visible', function() {
+  describe('when element is visible', function() {
     var result;
     var test = createTest();
 
@@ -16,7 +16,7 @@ describe('without using callbacks', function() {
     after(clean(test));
   });
 
-  describe('when image is not visible', function() {
+  describe('when element is not visible', function() {
     var result;
     var test = createTest({
       style: {
