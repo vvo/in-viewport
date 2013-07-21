@@ -6,6 +6,9 @@ Know when an element is in the window viewport or a custom viewport.
 
 ## Usage
 
+Be sure to be in standard mode, quirksmode is not supported since most browsers
+will report invalid values for window viewport.
+
 ### Immediate result
 
 ```js
