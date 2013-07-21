@@ -10,7 +10,7 @@
 
   function inViewport(elt, params, cb) {
     var opts = {
-      container: defaultContainer,
+      container: doc.body,
       offset: 0
     };
 
@@ -21,33 +21,16 @@
 
     var container = opts.container = params['container'] || opts.container;
     var offset = opts.offset = params['offset'] || opts.offset;
-    var instance = findInstance(container);
-
-    if (instance) {
-      return instance.inViewport(elt, offset, cb);
-    }
-
-    return instances[
-        instances.push(createInViewport(container)) - 1
-      ].inViewport(elt, offset, cb)
-  }
-
-  inViewport['check'] = check;
-
-  function check(container) {
-    container = container || defaultContainer;
-
-    findInstance(container).checkElements();
-  }
-
-  function findInstance(container) {
-    container = container || defaultContainer;
 
     for (var i = 0; i < instances.length; i++) {
       if (instances[i].container === container) {
-        return instances[i];
+        return instances[i].inViewport(elt, offset, cb);
       }
     }
+
+    var newInstance = createInViewport(container);
+    instances.push(newInstance);
+    return newInstance.inViewport(elt, offset, cb);
   }
 
   function addEvent( el, type, fn ) {
@@ -93,8 +76,8 @@
 
   function createInViewport(container) {
     var watches = [];
-    var scrollContainer = container === defaultContainer ? win : container;
-    var debouncedCheck = debounce(checkElements, 15);
+    var scrollContainer = container === doc.body ? win : container;
+    var debouncedCheck = debounce(checkImages, 15);
 
     addEvent(scrollContainer, 'scroll', debouncedCheck);
 
@@ -121,7 +104,7 @@
         height: offset
       };
 
-      if (container === defaultContainer) {
+      if (container === doc.body) {
         viewport.width += doc.documentElement.clientWidth;
         viewport.height += doc.documentElement.clientHeight;
       } else {
@@ -160,7 +143,7 @@
       }
     }
 
-    function checkElements() {
+    function checkImages() {
       var cb;
       while(cb = watches.shift()) {
         cb();
@@ -169,7 +152,6 @@
 
     return {
       container: container,
-      checkElements: checkElements,
       inViewport: inViewport
     }
   }
