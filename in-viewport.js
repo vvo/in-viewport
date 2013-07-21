@@ -4,7 +4,6 @@
 
 (function(win, doc){
   var instances = [];
-  var defaultContainer = doc.body;
 
   win['inViewport'] = inViewport;
 
