@@ -76,7 +76,7 @@
   function createInViewport(container) {
     var watches = [];
     var scrollContainer = container === doc.body ? win : container;
-    var debouncedCheck = debounce(checkImages, 15);
+    var debouncedCheck = debounce(checkElements, 15);
 
     addEvent(scrollContainer, 'scroll', debouncedCheck);
 
@@ -142,7 +142,7 @@
       }
     }
 
-    function checkImages() {
+    function checkElements() {
       var cb;
       while(cb = watches.shift()) {
         cb();
