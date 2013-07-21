@@ -1,4 +1,5 @@
-function testElem(x, y) {
+function testElem(x, y, offsetTest) {
+  offsetTest = offsetTest || 0;
   describe('dealing with an element located at '+x+','+y, function() {
     var test = createTest({
       style: {
@@ -36,8 +37,8 @@ function testElem(x, y) {
       });
     });
 
-    describe('when we scroll to the element', function() {
-      before(scroller(x, y));
+    describe('when we scroll near the element', function() {
+      before(scroller(x - offsetTest, y - offsetTest));
 
       it('callback was called', function() {
         assert(calls.length === 1, 'We got the inViewport callback');
@@ -64,4 +65,5 @@ function testElem(x, y) {
 }
 
 testElem(0, 10000);
+testElem(0, 10000, 100);
 testElem(10000, 10000);
