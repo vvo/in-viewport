@@ -27,9 +27,9 @@
       }
     }
 
-    var newInstance = createInViewport(container);
-    instances.push(newInstance);
-    return newInstance.inViewport(elt, offset, cb);
+    return instances[
+      instances.push(createInViewport(container)) - 1
+    ].inViewport(elt, offset, cb)
   }
 
   function addEvent( el, type, fn ) {
