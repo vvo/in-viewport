@@ -104,8 +104,8 @@
       };
 
       if (container === doc.body) {
-        viewport.width += doc.documentElement.clientWidth;
-        viewport.height += doc.documentElement.clientHeight;
+        viewport.width += win.innerWidth || doc.documentElement.clientWidth;
+        viewport.height += win.innerHeight || doc.documentElement.clientHeight;
       } else {
         pos.left -= containerRect.left;
         pos.top -= containerRect.top;
