@@ -87,7 +87,6 @@ Do not call `inViewport` on a detached, to-be-visible-without-scroll dom node.
 * Images, iframes, widgets [lazyloader](/vvo/lazyload)
 * infinite scroll
 * loading widgets only when needed
-* your ideas
 
 ## Testing
 
