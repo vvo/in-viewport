@@ -87,7 +87,12 @@
     function inViewport(elt, offset, cb) {
       if (!contains(doc.documentElement, elt) ||
           !contains(doc.documentElement, container)) {
-          return setTimeout(addWatch(elt, offset, cb), 0);
+          if (cb) {
+            return setTimeout(addWatch(elt, offset, cb), 0);
+          } else {
+            console.log('coucou')
+            return false;
+          }
       }
 
       var eltRect = elt.getBoundingClientRect();
