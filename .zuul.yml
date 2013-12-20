@@ -9,3 +9,5 @@ browsers:
     version: 24..latest
   - name: ie
     version: 6..latest
+  - name: iphone
+    version: latest
