@@ -1,40 +1,48 @@
 describe('without using callbacks', function() {
+  require('./fixtures/bootstrap.js');
+  beforeEach(h.clean);
+  afterEach(h.clean);
 
   describe('when element is visible', function() {
-    var result;
-    var test = createTest();
+    var test;
 
-    before(function() {
-      insertTest(test);
-      result = inViewport(test);
+    beforeEach(function() {
+      test = h.createTest();
+      h.insertTest(test);
     });
 
-    it('gives a positive result immediately', function() {
-      assert(result === true);
+    it('gives a positive result', function() {
+      assert.equal(inViewport(test), true);
     });
-
-    after(clean(test));
   });
 
   describe('when element is not visible', function() {
-    var result;
-    var test = createTest({
-      style: {
-        position: 'relative',
-        top: '15000px'
-      }
+    var test;
+
+    beforeEach(function() {
+      test = h.createTest({
+        style: {
+          position: 'relative',
+          top: '15000px'
+        }
+      });
+      h.insertTest(test);
     });
 
-    before(function() {
-      insertTest(test);
-      result = inViewport(test);
+    it('gives a negative result', function() {
+      assert.equal(inViewport(test), false);
     });
-
-    it('gives a negative result immediately', function() {
-      assert(result === false);
-    });
-
-    after(clean(test));
   });
 
+  describe('when is not in the DOM', function() {
+    var test;
+
+    beforeEach(function() {
+      test = h.createTest();
+    });
+
+    it('gives a negative result', function() {
+      assert.equal(inViewport(test), false);
+    });
+  });
 });

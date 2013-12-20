@@ -1,65 +1,70 @@
 function testElem(x, y, offsetTest) {
   offsetTest = offsetTest || 0;
+
   describe('dealing with an element located at '+x+','+y, function() {
-    var test = createTest({
-      style: {
-        width: '10px',
-        height: '100px',
-        position: 'relative',
-        left: x +  'px',
-        top: y + 'px'
-      }
-    });
+    require('./fixtures/bootstrap.js');
+    beforeEach(h.clean);
+    afterEach(h.clean);
 
-    var calls = [];
-
-    before(function() {
-      insertTest(test);
+    var test;
+    var calls;
+    beforeEach(function() {
+      calls = [];
+      test = h.createTest({
+        style: {
+          left: x +  'px',
+          top: y + 'px'
+        }
+      });
+      h.insertTest(test);
       inViewport(test, cb);
     });
 
     describe('when we scroll down a little', function() {
-      before(scroller(0, 1000));
+      beforeEach(h.scroller(0, 1000));
 
-      it('callback was not called', function() {
-        assert(
-          calls.length === 0,
-          'Callback unnecessarily called'
-        );
+      it('cb not called', function() {
+        assert.equal(calls.length, 0);
       });
     });
 
-    describe('when we scroll down too far', function() {
-      before(scroller(x * 2, y * 2));
+    describe('when we scroll down too far (debounce)', function() {
+      beforeEach(h.scroller(x * 2, y * 2));
 
-      it('callback is not called', function() {
-        assert(calls.length === 0, 'Callback unnecessarily called');
+      it('cb not called', function() {
+        assert.equal(calls.length, 0);
       });
     });
 
-    describe('when we scroll near the element', function() {
-      before(scroller(x - offsetTest, y - offsetTest));
+    describe('when we scroll near the element (offset)', function() {
+      beforeEach(h.scroller(x - offsetTest, y - offsetTest));
 
-      it('callback was called', function() {
-        assert(calls.length === 1, 'We got the inViewport callback');
+      it('cb called', function() {
+        assert.equal(calls.length, 1);
       });
     });
 
-    describe('when we scroll down, up, like crazy', function() {
-      before(scroller(0, 200));
-      before(scroller(0, 20000));
-      before(scroller(0, 0));
+    describe('when we scroll down, up, like crazy (debounce)', function() {
+      beforeEach(h.scroller(0, 200));
+      beforeEach(h.scroller(0, 20000));
+      beforeEach(h.scroller(0, 0));
 
-      it('no more callback called', function() {
-        assert(calls.length === 1, 'Too much callback');
+      it('doesnt calls the cb', function() {
+        assert.equal(calls.length, 0);
       });
+
+      describe('when we are at the element', function() {
+        beforeEach(h.scroller(x, y));
+
+        it('calls the cb', function() {
+          assert.equal(calls.length, 1);
+        });
+      })
     });
 
     function cb(result) {
       calls.push(result);
     }
-
-    after(clean(test));
   });
 
 }

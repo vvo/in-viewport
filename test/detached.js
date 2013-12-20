@@ -1,39 +1,42 @@
 describe('detached DOM node', function() {
-  var visible = false;
-  var test = createTest();
+  require('./fixtures/bootstrap.js');
+  beforeEach(h.clean);
+  afterEach(h.clean);
 
-  before(function() {
+  var visible = false;
+  var test;
+
+  beforeEach(function() {
+    test = h.createTest();
     inViewport(test, function() {
       visible = true;
     });
   });
 
-  it('callback not called', function() {
-    assert(visible === false);
+  it('cb not called', function() {
+    assert.equal(visible, false);
   });
 
-  describe('when we insert it into DOM', function() {
+  describe('when inserted into the DOM', function() {
 
-    before(function() {
-      insertTest(test);
+    beforeEach(function() {
+      h.insertTest(test);
     });
 
-    before(wait(50));
+    beforeEach(h.wait(50));
 
-    it('callback still not called', function() {
+    it('cb not called', function() {
       // because no event (scroll) triggered a watch
-      assert(visible === false);
+      assert.equal(visible, false);
+    });
+
+    describe('after some scrolling', function() {
+      beforeEach(h.scroller(0, 100));
+      beforeEach(h.scroller(0, 0));
+
+      it('cb called', function() {
+        assert.equal(visible, true);
+      })
     });
   });
-
-  describe('when we scroll a little', function() {
-    before(scroller(0, 1));
-    before(scroller(0, 0));
-
-    it('callback was called', function() {
-      assert(visible === true);
-    })
-  });
-
-  after(clean(test));
 });

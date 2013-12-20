@@ -1,0 +1,13 @@
+ui: mocha-bdd
+html: test/fixtures/template.html
+scripts:
+  - in-viewport.js
+browsers:
+  - name: chrome
+    version: 29..latest
+  - name: firefox
+    version: 24..latest
+  - name: ie
+    version: 6..latest
+  - name: iphone
+    version: latest

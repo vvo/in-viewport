@@ -1,19 +1,24 @@
 describe('in-viewport watch callback', function() {
+  require('./fixtures/bootstrap.js');
+  beforeEach(h.clean);
+  afterEach(h.clean);
+
   var scrolled = false;
-  var test = createTest();
+  var test;
   var received;
 
-  before(function(done) {
-    insertTest(test);
+  before(function() {
+    test = h.createTest();
+    h.insertTest(test);
     inViewport(test, function(element) {
       received = element;
-      done();
     });
   });
 
-  it('is called with the associated DOMElement', function() {
-    assert(received === test, 'did not receive the DOMElement');
-  });
+  beforeEach(h.scroller(0, 100));
+  beforeEach(h.scroller(0, 0));
 
-  after(clean(test));
+  it('cb called with the associated DOMElement', function() {
+    assert.equal(received, test);
+  });
 });

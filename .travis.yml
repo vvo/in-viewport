@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - '0.10'
+  env:
+  global:
+  - SAUCE_USERNAME=inviewportvvo
+  - secure: S1UNbMEh3QYvNcVgCIRkRkec9Sglgk2hA+o35NfdRrurE+z+b1aVh28nx1Jy0U9fPvUi5vwRoD/S8lTM+Yqf2Qql590adg6mCS/hBBprGfjoIUSQ4uQZanKZW69cM6tBGCjMUo/Nw67xtOsP8xiiFEpiS/yAfQz4OGKzXesg7Jg=

@@ -1,9 +1,14 @@
 describe('asking if a visible div scrolled', function() {
-  var scrolled = false;
-  var test = createTest();
+  require('./fixtures/bootstrap.js');
+  beforeEach(h.clean);
+  afterEach(h.clean);
 
-  before(function(done) {
-    insertTest(test);
+  var scrolled = false;
+  var test;
+
+  beforeEach(function(done) {
+    test = h.createTest();
+    h.insertTest(test);
     inViewport(test, function() {
       scrolled = true;
       done();
@@ -13,6 +18,4 @@ describe('asking if a visible div scrolled', function() {
   it('callback called', function() {
     assert(scrolled === true);
   });
-
-  after(clean(test));
 });
