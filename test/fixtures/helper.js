@@ -17,14 +17,15 @@ function clean() {
 }
 
 function createTest(params) {
-  var merge = require('deepmerge');
+  var merge = require('merge');
 
   params = params || {};
 
   var test = document.createElement(params.tagName || 'div');
 
   params.attributes = merge({
-    class: 'unit-test'
+    // required by IE < 11, `'class'` instead of `class`
+    'class': 'unit-test'
   }, params.attributes || {});
 
   for (var attr in params.attributes) {
@@ -40,7 +41,10 @@ function createTest(params) {
 
 function insertTest(test, parent) {
   parent = parent || playground;
-  parent.insertBefore(test, parent.childNodes[0]);
+  parent.insertBefore(test,
+    parent.hasChildNodes() ?
+      parent.childNodes[0] :
+      null); // required by IE <= 8 when no child nodes
 }
 
 function scroller(x, y, id, cb) {

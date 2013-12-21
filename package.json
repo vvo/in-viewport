@@ -18,7 +18,7 @@
     "grunt-closure-compiler": "git://github.com/vvo/grunt-closure-compiler.git#v0.1.0",
     "grunt-contrib-watch": "~0.4.3",
     "grunt-contrib-jshint": "~0.4.3",
-    "deepmerge": "~0.2.7",
-    "zuul": "~1.0.9"
+    "zuul": "~1.0.9",
+    "merge": "~1.1.2"
   }
 }
