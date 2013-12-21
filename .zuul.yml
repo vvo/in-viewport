@@ -8,10 +8,8 @@ browsers:
   - name: firefox
     version: 24..latest
   - name: ie
-    version: 6..latest
+    version: 8..latest
   - name: iphone
-    version: 4.3..latest
+    version: 5.0..latest
   - name: ipad
-    version: 4.3..latest
-  - name: safari
-    version: 5.1.7..latest
+    version: 5.0..latest
