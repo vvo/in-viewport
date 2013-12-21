@@ -65,6 +65,8 @@ describe('using a div as a reference container', function() {
 
     describe('to the element', function() {
       beforeEach(h.scroller(1000, 1000, 'container'));
+      beforeEach(h.scroller(1005, 1005, 'container'));
+      beforeEach(h.wait(50));
 
       it('cb was called', function() {
         assert.strictEqual(calls.length, 1);
