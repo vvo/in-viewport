@@ -1,5 +1,6 @@
 describe('in-viewport watch callback', function() {
   require('./fixtures/bootstrap.js');
+
   beforeEach(h.clean);
   afterEach(h.clean);
 
@@ -7,7 +8,7 @@ describe('in-viewport watch callback', function() {
   var test;
   var received;
 
-  before(function() {
+  beforeEach(function() {
     test = h.createTest();
     h.insertTest(test);
     inViewport(test, function(element) {
@@ -19,6 +20,6 @@ describe('in-viewport watch callback', function() {
   beforeEach(h.scroller(0, 0));
 
   it('cb called with the associated DOMElement', function() {
-    assert.equal(received, test);
+    assert.strictEqual(received, test);
   });
 });
