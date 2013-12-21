@@ -92,31 +92,14 @@ Do not call `inViewport` on a detached, to-be-visible-without-scroll dom node.
 
 ## Testing
 
-Open `test/test.html` or use a headless browser:
+Launch the test server:
 
-```bash
-npm install -g mocha-phantomjs phantomjs
-npm test
+```shell
+npm install -g zuul
+zuul --local 8080 -- test/*.js
 ```
 
-## Hacking
-
-You need package.json dependencies and grunt.
-
-```bash
-npm install
-npm install -g grunt-cli
-grunt watch
-```
-
-Start an http-server in root dir:
-
-```bash
-npm install http-server -g
-http-server
-```
-
-Open `test/test.html`, code, test, GOTO code.
+[Tests](test/) are written with [mocha](https://github.com/visionmedia/mocha).
 
 ## Building
 
