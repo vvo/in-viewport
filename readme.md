@@ -2,7 +2,7 @@
 
 Know when an element is in the window viewport or a custom viewport.
 
-[![Build Status](https://travis-ci.org/vvo/in-viewport.png?branch=master)](https://travis-ci.org/vvo/lazyload)
+[![Build Status](https://travis-ci.org/vvo/in-viewport.png?branch=master)](https://travis-ci.org/vvo/in-viewport)
 
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/in-viewportvvo.svg)](https://saucelabs.com/u/in-viewportvvo)
 
