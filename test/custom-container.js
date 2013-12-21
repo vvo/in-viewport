@@ -41,7 +41,7 @@ describe('using a div as a reference container', function() {
     beforeEach(h.scroller(1000, 1000));
 
     it('cb not called', function() {
-      assert.equal(calls.length, 0);
+      assert.strictEqual(calls.length, 0);
     });
   });
 
@@ -51,7 +51,7 @@ describe('using a div as a reference container', function() {
       beforeEach(h.scroller(100, 100, 'container'));
 
       it('cb not called', function() {
-        assert.equal(calls.length, 0);
+        assert.strictEqual(calls.length, 0);
       });
     });
 
@@ -59,7 +59,7 @@ describe('using a div as a reference container', function() {
       beforeEach(h.scroller(10000, 10000, 'container'));
 
       it('cb not called', function() {
-        assert.equal(calls.length, 0);
+        assert.strictEqual(calls.length, 0);
       });
     });
 
@@ -67,7 +67,7 @@ describe('using a div as a reference container', function() {
       beforeEach(h.scroller(1000, 1000, 'container'));
 
       it('cb was called', function() {
-        assert.equal(calls.length, 1);
+        assert.strictEqual(calls.length, 1);
       });
     });
 
@@ -78,7 +78,7 @@ describe('using a div as a reference container', function() {
       beforeEach(h.scroller(1000, 1000, 'container'));
 
       it('cb was called once', function() {
-        assert.equal(calls.length, 1);
+        assert.strictEqual(calls.length, 1);
       });
     });
 

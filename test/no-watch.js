@@ -12,7 +12,7 @@ describe('without using callbacks', function() {
     });
 
     it('gives a positive result', function() {
-      assert.equal(inViewport(test), true);
+      assert.strictEqual(inViewport(test), true);
     });
   });
 
@@ -30,7 +30,7 @@ describe('without using callbacks', function() {
     });
 
     it('gives a negative result', function() {
-      assert.equal(inViewport(test), false);
+      assert.strictEqual(inViewport(test), false);
     });
   });
 
@@ -42,7 +42,7 @@ describe('without using callbacks', function() {
     });
 
     it('gives a negative result', function() {
-      assert.equal(inViewport(test), false);
+      assert.strictEqual(inViewport(test), false);
     });
   });
 });

@@ -34,7 +34,7 @@ describe('using offsets', function() {
         beforeEach(h.scroller(0, scrollTo - 100));
 
         it('cb not called', function() {
-          assert.equal(calls.length, 0);
+          assert.strictEqual(calls.length, 0);
         });
       });
 
@@ -43,7 +43,7 @@ describe('using offsets', function() {
         beforeEach(h.scroller(0, scrollTo - 20));
 
         it('cb no called', function() {
-          assert.equal(calls.length, 0);
+          assert.strictEqual(calls.length, 0);
         });
       });
 
@@ -52,7 +52,7 @@ describe('using offsets', function() {
         beforeEach(h.scroller(0, scrollTo));
 
         it('cb called', function() {
-          assert.equal(calls.length, 1);
+          assert.strictEqual(calls.length, 1);
         });
       });
 

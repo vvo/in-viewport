@@ -14,7 +14,7 @@ describe('detached DOM node', function() {
   });
 
   it('cb not called', function() {
-    assert.equal(visible, false);
+    assert.strictEqual(visible, false);
   });
 
   describe('when inserted into the DOM', function() {
@@ -22,21 +22,11 @@ describe('detached DOM node', function() {
     beforeEach(function() {
       h.insertTest(test);
     });
+    beforeEach(h.scroller(0, 100));
+    beforeEach(h.scroller(0, 0));
 
-    beforeEach(h.wait(50));
-
-    it('cb not called', function() {
-      // because no event (scroll) triggered a watch
-      assert.equal(visible, false);
-    });
-
-    describe('after some scrolling', function() {
-      beforeEach(h.scroller(0, 100));
-      beforeEach(h.scroller(0, 0));
-
-      it('cb called', function() {
-        assert.equal(visible, true);
-      })
+    it('cb called', function() {
+      assert.strictEqual(visible, true);
     });
   });
 });

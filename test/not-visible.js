@@ -24,7 +24,7 @@ function testElem(x, y, offsetTest) {
       beforeEach(h.scroller(0, 1000));
 
       it('cb not called', function() {
-        assert.equal(calls.length, 0);
+        assert.strictEqual(calls.length, 0);
       });
     });
 
@@ -32,7 +32,7 @@ function testElem(x, y, offsetTest) {
       beforeEach(h.scroller(x * 2, y * 2));
 
       it('cb not called', function() {
-        assert.equal(calls.length, 0);
+        assert.strictEqual(calls.length, 0);
       });
     });
 
@@ -40,7 +40,7 @@ function testElem(x, y, offsetTest) {
       beforeEach(h.scroller(x - offsetTest, y - offsetTest));
 
       it('cb called', function() {
-        assert.equal(calls.length, 1);
+        assert.strictEqual(calls.length, 1);
       });
     });
 
@@ -50,14 +50,14 @@ function testElem(x, y, offsetTest) {
       beforeEach(h.scroller(0, 0));
 
       it('doesnt calls the cb', function() {
-        assert.equal(calls.length, 0);
+        assert.strictEqual(calls.length, 0);
       });
 
       describe('when we are at the element', function() {
         beforeEach(h.scroller(x, y));
 
         it('calls the cb', function() {
-          assert.equal(calls.length, 1);
+          assert.strictEqual(calls.length, 1);
         });
       })
     });
