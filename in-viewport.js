@@ -90,7 +90,6 @@
           if (cb) {
             return setTimeout(addWatch(elt, offset, cb), 0);
           } else {
-            console.log('coucou')
             return false;
           }
       }
