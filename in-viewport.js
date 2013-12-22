@@ -21,6 +21,8 @@
     var container = opts.container = params['container'] || opts.container;
     var offset = opts.offset = params['offset'] || opts.offset;
 
+
+
     for (var i = 0; i < instances.length; i++) {
       if (instances[i].container === container) {
         return instances[i].inViewport(elt, offset, cb);
@@ -75,13 +77,20 @@
 
   function createInViewport(container) {
     var watches = [];
+    var watching = [];
+
     var scrollContainer = container === doc.body ? win : container;
     var debouncedCheck = debounce(checkElements, 15);
 
     addEvent(scrollContainer, 'scroll', debouncedCheck);
 
+
     if (scrollContainer === win) {
       addEvent(win, 'resize', debouncedCheck);
+    }
+
+    if (typeof window['MutationObserver'] === 'function') {
+      observeDOM(watching, container, debouncedCheck);
     }
 
     function inViewport(elt, offset, cb) {
@@ -125,6 +134,7 @@
 
       if (visible) {
         if (cb) {
+          watching.splice(indexOf.call(watching, elt), 1);
           cb(elt);
         } else {
           return true;
@@ -139,9 +149,13 @@
     }
 
     function addWatch(elt, offset, cb) {
+      if (indexOf.call(watching, elt) === -1) {
+        watching.push(elt);
+      }
+
       return function() {
         watches.push(function() {
-          inViewport(elt, offset, cb, true);
+          inViewport(elt, offset, cb);
         });
       }
     }
@@ -156,6 +170,35 @@
     return {
       container: container,
       inViewport: inViewport
+    }
+  }
+
+  function indexOf(value) {
+    for (var i = this.length; i-- && this[i] !== value;);
+    return i;
+  }
+
+  function observeDOM(elements, container, cb) {
+    var observer = new MutationObserver(watch);
+    var filter = Array.prototype.filter;
+
+    observer.observe(container, {
+      childList: true,
+      subtree: true
+    });
+
+    function watch(mutations) {
+      mutations.forEach(checkAddedNodes);
+    }
+
+    function isWatched(node) {
+      return indexOf.call(elements, node) !== -1;
+    }
+
+    function checkAddedNodes(mutation) {
+      if (filter.call(mutation.addedNodes, isWatched).length > 0) {
+        setTimeout(cb, 0);
+      }
     }
   }
 

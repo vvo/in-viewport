@@ -22,11 +22,36 @@ describe('detached DOM node', function() {
     beforeEach(function() {
       h.insertTest(test);
     });
-    beforeEach(h.scroller(0, 100));
-    beforeEach(h.scroller(0, 0));
 
-    it('cb called', function() {
-      assert.strictEqual(visible, true);
+    describe('without scrolling', function () {
+      if (typeof MutationObserver === 'function') {
+        describe('when the browser supports `MutationObserver`', function () {
+
+          beforeEach(h.wait(50));
+
+          it('cb called', function() {
+            assert.strictEqual(visible, true);
+          });
+        });
+      } else {
+        describe('when the browser does not supports `MutationObserver`', function () {
+          beforeEach(h.wait(50));
+
+          it('cb not called', function() {
+            assert.strictEqual(visible, false);
+          });
+        });
+      }
+
+    });
+
+    describe('with scrolling', function () {
+      beforeEach(h.scroller(0, 100));
+      beforeEach(h.scroller(0, 0));
+
+      it('cb called', function() {
+        assert.strictEqual(visible, true);
+      });
     });
   });
 });
