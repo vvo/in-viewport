@@ -188,17 +188,19 @@
     });
 
     function watch(mutations) {
-      mutations.forEach(checkAddedNodes);
+      // some new DOM nodes where previously watched
+      // we should check their positions
+      if (mutations.some(knownNodes) === true) {
+        setTimeout(cb, 0);
+      }
     }
 
     function isWatched(node) {
       return indexOf.call(elements, node) !== -1;
     }
 
-    function checkAddedNodes(mutation) {
-      if (filter.call(mutation.addedNodes, isWatched).length > 0) {
-        setTimeout(cb, 0);
-      }
+    function knownNodes(mutation) {
+      return filter.call(mutation.addedNodes, isWatched).length > 0
     }
   }
 
