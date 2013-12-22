@@ -4,7 +4,7 @@
   "description": "Get a callback when an element enters the viewport (body) or a custom viewport",
   "main": "build/in-viewport.min.js",
   "scripts": {
-    "test": "grunt && zuul -- test/*.js"
+    "test": "grunt jshint && zuul -- test/*.js"
   },
   "repository": {
     "type": "git",
