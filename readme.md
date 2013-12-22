@@ -110,6 +110,8 @@ npm install -g zuul
 zuul --local 8080 -- test/*.js
 ```
 
+Browse to [http://localhost:8080/__zuul](http://localhost:8080/__zuul).
+
 [Tests](test/) are written with [mocha](https://github.com/visionmedia/mocha).
 
 ## Building
