@@ -33,16 +33,7 @@ describe('detached DOM node', function() {
             assert.strictEqual(visible, true);
           });
         });
-      } else {
-        describe('when the browser does not supports `MutationObserver`', function () {
-          beforeEach(h.wait(50));
-
-          it('cb not called', function() {
-            assert.strictEqual(visible, false);
-          });
-        });
       }
-
     });
 
     describe('with scrolling', function () {
