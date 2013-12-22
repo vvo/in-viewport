@@ -38,6 +38,8 @@ function testElem(x, y, offsetTest) {
 
     describe('when we scroll near the element (offset)', function() {
       beforeEach(h.scroller(x - offsetTest, y - offsetTest));
+      beforeEach(h.scroller(x - offsetTest + 1, y - offsetTest + 1));
+      beforeEach(h.wait(50));
 
       it('cb called', function() {
         assert.strictEqual(calls.length, 1);
