@@ -17,6 +17,7 @@
     "grunt-closure-compiler": "0.0.21",
     "grunt-contrib-jshint": "~0.7.2",
     "zuul": "~1.0.9",
-    "merge": "~1.1.2"
+    "merge": "~1.1.2",
+    "grunt-cli": "~0.1.11"
   }
 }
