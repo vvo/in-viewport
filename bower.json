@@ -1,13 +1,11 @@
 {
   "name": "in-viewport",
   "description": "Get a callback when an element enters the viewport",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "in-viewport.js",
   "ignore": [
     "**/.*",
     "node_modules",
-    "components",
-    "test/*.js",
-    "test/*.html"
+    "test/*.js"
   ]
 }
