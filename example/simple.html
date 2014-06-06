@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple example</title>
+
+  <style>
+    #test {
+      position:relative;
+      top: 2000px;
+      width: 10px;
+      height: 10px;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="test"></div>
+  <div>Coucou</div>
+
+  <script src="../in-viewport.js"></script>
+
+  <script>
+  var el = document.getElementById('test');
+
+  inViewport(el, function() {
+    alert('YES');
+  });
+  </script>
+</body>
+</html>
