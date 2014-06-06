@@ -1,6 +1,6 @@
 {
   "name": "in-viewport",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Get a callback when an element enters the viewport (body) or a custom viewport",
   "main": "build/in-viewport.min.js",
   "scripts": {
@@ -13,11 +13,11 @@
   "author": "Vincent Voyer <vincent.voyer@gmail.com> (http://github.com/vvo)",
   "license": "MIT",
   "devDependencies": {
-    "grunt": "~0.4.2",
+    "grunt": "~0.4.5",
     "grunt-closure-compiler": "0.0.21",
-    "grunt-contrib-jshint": "~0.7.2",
-    "zuul": "~1.0.9",
-    "merge": "~1.1.2",
-    "grunt-cli": "~0.1.11"
+    "grunt-contrib-jshint": "~0.10.0",
+    "zuul": "~1.6.5",
+    "merge": "~1.1.3",
+    "grunt-cli": "~0.1.13"
   }
 }
