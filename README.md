@@ -2,8 +2,8 @@
 
 Know when an element is in the window viewport or a custom viewport.
 
-[![Build Status](https://travis-ci.org/vvo/in-viewport.png?branch=master)](https://travis-ci.org/vvo/in-viewport)
-
+[![Dependency Status](http://img.shields.io/david/vvo/in-viewport.svg?style=flat-square)](https://david-dm.org/vvo/in-viewport)
+[![devDependency Status](http://img.shields.io/david/dev/vvo/in-viewport.svg?style=flat-square)](https://david-dm.org/vvo/in-viewport#info=devDependencies)
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/in-viewportvvo.svg)](https://saucelabs.com/u/in-viewportvvo)
 
 ## API

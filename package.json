@@ -14,10 +14,10 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
     "grunt-closure-compiler": "0.0.21",
     "grunt-contrib-jshint": "~0.10.0",
-    "zuul": "~1.6.5",
-    "merge": "~1.1.3",
-    "grunt-cli": "~0.1.13"
+    "merge": "^1.2.0",
+    "zuul": "^1.10.2"
   }
 }
