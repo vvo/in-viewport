@@ -1,5 +1,5 @@
 /**
-* @license in-viewport v0.4.1 | github.com/vvo/in-viewport#license
+* @license in-viewport v0.4.2 | github.com/vvo/in-viewport#license
 */
 
 (function(win, doc){
