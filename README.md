@@ -1,9 +1,6 @@
-# inViewport
+# inViewport [![devDependency Status](http://img.shields.io/david/dev/vvo/in-viewport.svg?style=flat-square)](https://david-dm.org/vvo/in-viewport#info=devDependencies)
 
 Know when an element is in the window viewport or a custom viewport.
-
-[![Dependency Status](http://img.shields.io/david/vvo/in-viewport.svg?style=flat-square)](https://david-dm.org/vvo/in-viewport)
-[![devDependency Status](http://img.shields.io/david/dev/vvo/in-viewport.svg?style=flat-square)](https://david-dm.org/vvo/in-viewport#info=devDependencies)
 
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/in-viewportvvo.svg)](https://saucelabs.com/u/in-viewportvvo)
 
@@ -12,6 +9,7 @@ Know when an element is in the window viewport or a custom viewport.
 ### Immediate result
 
 ```js
+var inViewport = require('in-viewport');
 var elem = document.getElementById('myFancyDiv');
 
 var isInViewport = inViewport(elem); // returns `true` or `false`
@@ -24,6 +22,7 @@ alert('myFancyDiv is ' + isInViewport ? 'visible' : 'not visible' + ' in the win
 We watch for your element to enters the viewport and call your callback when it does.
 
 ```js
+var inViewport = require('in-viewport');
 var elem = document.getElementById('myFancyDiv');
 
 inViewport(elem, visible);
@@ -41,6 +40,7 @@ By default, we use the current window as the reference viewport.
 But you can also specify another element as a reference viewport.
 
 ```js
+var inViewport = require('in-viewport');
 var customContainer = document.getElementById('myFancyContainer');
 var elem = document.getElementById('myFancyDiv');
 
@@ -61,6 +61,7 @@ But maybe you want to know when your element is **soon-to-be-shown** in the view
 Use the `offset` param for that!
 
 ```js
+var inViewport = require('in-viewport');
 var elem = document.getElementById('myFancyDiv');
 
 inViewport(elem, { offset: 300 }, visible);
@@ -107,8 +108,7 @@ will report invalid values for window viewport.
 Launch the test server:
 
 ```shell
-npm install -g zuul
-zuul --local 8080 -- test/*.js
+npm run dev
 ```
 
 Browse to [http://localhost:8080/__zuul](http://localhost:8080/__zuul).
@@ -117,13 +117,17 @@ Browse to [http://localhost:8080/__zuul](http://localhost:8080/__zuul).
 
 ## Building
 
-[Install](http://code.google.com/p/closure-compiler/downloads/list) closure-compiler.
+We provide a pre-built version `in-viewport` in `build/in-viewport.min.js`.
 
-```bash
-CLOSURE_PATH=~/path/to/closure-compiler/ grunt
+But you can build your own:
+
+```shell
+npm run build
 ```
 
-You get the [build/in-viewport.min.js](build/in-viewport.min.js) file.
+You get the build in `build/in-viewport.min.js`.
+
+Please consider using [browserify](https://github.com/substack/node-browserify).
 
 ## License
 
