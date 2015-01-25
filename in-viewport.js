@@ -18,13 +18,13 @@ function inViewport(elt, params, cb) {
 
   for (var i = 0; i < instances.length; i++) {
     if (instances[i].container === container) {
-      return instances[i].inViewport(elt, offset, cb);
+      return instances[i].isInViewport(elt, offset, cb);
     }
   }
 
   return instances[
     instances.push(createInViewport(container)) - 1
-  ].inViewport(elt, offset, cb);
+  ].isInViewport(elt, offset, cb);
 }
 
 function addEvent( el, type, fn ) {
