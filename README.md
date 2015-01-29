@@ -119,7 +119,7 @@ Browse to [http://localhost:8080/__zuul](http://localhost:8080/__zuul).
 
 ## Building
 
-We provide a pre-built version `in-viewport` in `build/in-viewport.min.js`.
+We provide a pre-built version of `in-viewport` in `build/in-viewport.min.js`.
 
 But you can build your own:
 
