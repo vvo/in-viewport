@@ -4,10 +4,10 @@
   "description": "Get a callback when an element enters the viewport (body) or a custom viewport",
   "main": "./in-viewport.js",
   "scripts": {
-    "build": "browserify ./in-viewport.js -s inViewport -p deumdify > build/in-viewport.min.js",
+    "build": "browserify ./in-viewport.js -s inViewport -p deumdify | ccjs - > build/in-viewport.min.js",
     "watch": "watchify ./in-viewport.js -d -s inViewport -p deumdify -o build/in-viewport.min.js -v",
-    "dev": "npm run watch & zuul --local 8080 -- test/*.js",
-    "test": "npm run build && zuul -- test/*.js"
+    "dev": "npm run watch & DEBUG=zuul* zuul --local 8080 -- test/*.js",
+    "test": "npm run build && DEBUG=zuul* zuul --tunnel ngrok -- test/*.js"
   },
   "repository": {
     "type": "git",
@@ -16,40 +16,12 @@
   "author": "Vincent Voyer <vincent.voyer@gmail.com> (http://github.com/vvo)",
   "license": "MIT",
   "devDependencies": {
-    "browserify": "^8.1.1",
-    "deumdify": "^1.0.4",
-    "merge": "^1.2.0",
-    "uglifyify": "^3.0.1",
-    "watchify": "^2.2.1",
-    "zuul": "^1.16.5"
-  },
-  "browserify": {
-    "transform": [
-      [
-        "uglifyify",
-        {
-          "mangle": true,
-          "screw-ie8": true,
-          "compress": {
-            "sequences": true,
-            "properties": true,
-            "dead_code": true,
-            "drop_debugger": true,
-            "unsafe": true,
-            "conditionals": true,
-            "comparisons": true,
-            "evaluate": true,
-            "booleans": true,
-            "loops": true,
-            "unused": true,
-            "hoist_funs": true,
-            "if_return": true,
-            "join_vars": true,
-            "cascade": true,
-            "drop_console": true
-          }
-        }
-      ]
-    ]
+    "browserify": "9.0.3",
+    "closurecompiler": "1.5.1",
+    "deumdify": "1.1.0",
+    "merge": "1.2.0",
+    "watchify": "2.4.0",
+    "zuul": "2.1.1",
+    "zuul-ngrok": "3.0.0"
   }
 }
