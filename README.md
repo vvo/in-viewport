@@ -100,7 +100,7 @@ in-viewport after inserting elements in the DOM.
 
 ## Quirksmode
 
-Be sure to be in [standards-compliant mode](http://en.wikipedia.org/wiki/HTML5#Markup].
+Be sure to be in [standards-compliant mode](http://en.wikipedia.org/wiki/HTML5#Markup).
 
 [Quirks mode](http://en.wikipedia.org/wiki/Quirks_mode) is not supported since most browsers
 will report invalid values for window viewport.
