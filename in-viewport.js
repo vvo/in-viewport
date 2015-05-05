@@ -93,7 +93,13 @@ function createInViewport(container) {
       if (cb) {
         return setTimeout(addWatch(elt, offset, cb), 0);
       }
-
+      return false;
+    }
+    
+    if (!elt.offsetWidth && !elt.offsetHeight) {
+      if (cb) {
+        return setTimeout(addWatch(elt, offset, cb), 0);
+      }
       return false;
     }
 
