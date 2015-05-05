@@ -3,9 +3,8 @@ module.exports = {
   insertTest: insertTest,
   clean: clean,
   scroller: scroller,
-  wait: wait,
-  clean: clean
-}
+  wait: wait
+};
 
 var playground = document.getElementById('playground');
 
