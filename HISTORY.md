@@ -1,3 +1,8 @@
+# 3.1.0 (2015-05-23)
+
+  * feat: hidden elements should not be considered visible when scrolling
+    fixes #9
+
 # 3.0.2 (2015-03-14)
   
   * build with closure compiler
