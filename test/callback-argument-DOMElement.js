@@ -4,7 +4,6 @@ describe('in-viewport watch callback', function() {
   beforeEach(h.clean);
   afterEach(h.clean);
 
-  var scrolled = false;
   var test;
   var received;
 

@@ -12,7 +12,7 @@ function testElem(x, y, offsetTest) {
       calls = [];
       test = h.createTest({
         style: {
-          left: x +  'px',
+          left: x + 'px',
           top: y + 'px'
         }
       });
