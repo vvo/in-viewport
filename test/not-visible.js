@@ -71,6 +71,6 @@ function testElem(x, y, offsetTest) {
 
 }
 
-testElem(0, 10000);
-testElem(0, 10000, 100);
-testElem(10000, 10000);
+testElem(0, 3000);
+testElem(0, 3000, 100);
+testElem(3000, 3000);
