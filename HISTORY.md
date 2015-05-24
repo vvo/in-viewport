@@ -1,3 +1,7 @@
+# 3.2.0 (2015-05-24)
+
+  * fix: children of hidden parents were not displayed, use a setInterval for this
+
 # 3.1.0 (2015-05-23)
 
   * feat: hidden elements should not be considered visible when scrolling
