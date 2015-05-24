@@ -1,6 +1,7 @@
 module.exports = inViewport;
 
 var instances = [];
+var supportsMutationObserver = typeof global.MutationObserver === 'function';
 
 function inViewport(elt, params, cb) {
   var opts = {
@@ -78,14 +79,19 @@ function createInViewport(container) {
 
   addEvent(scrollContainer, 'scroll', debouncedCheck);
 
-
   if (scrollContainer === global) {
     addEvent(global, 'resize', debouncedCheck);
   }
 
-  if (typeof global.MutationObserver === 'function') {
+  if (supportsMutationObserver) {
     observeDOM(watching, container, debouncedCheck);
   }
+
+  // failsafe check, every 200ms we check for visible images
+  // usecase: a hidden parent containing eleements
+  // when the parent becomes visible, we have no event that the children
+  // became visible
+  setInterval(debouncedCheck, 150);
 
   function isInViewport(elt, offset, cb) {
     var visible = isVisible(elt, offset);
@@ -95,12 +101,13 @@ function createInViewport(container) {
         cb(elt);
       }
       return true;
-    } else {
-      if (cb) {
-        setTimeout(addWatch(elt, offset, cb), 0);
-      }
-      return false;
     }
+
+    if (cb) {
+      setTimeout(addWatch(elt, offset, cb), 0);
+    }
+
+    return false;
   }
 
   function isVisible(elt, offset) {
@@ -108,8 +115,8 @@ function createInViewport(container) {
       return false;
     }
 
-    // Check if the element is visible 
-    // cf: https://github.com/jquery/jquery/blob/740e190223d19a114d5373758127285d14d6b71e/src/css/hiddenVisibleSelectors.js
+    // Check if the element is visible
+    // https://github.com/jquery/jquery/blob/740e190223d19a114d5373758127285d14d6b71e/src/css/hiddenVisibleSelectors.js
     if (!elt.offsetWidth || !elt.offsetHeight) {
       return false;
     }
@@ -196,10 +203,13 @@ function indexOf(value) {
 function observeDOM(elements, container, cb) {
   var observer = new MutationObserver(watch);
   var filter = Array.prototype.filter;
+  var concat = Array.prototype.concat;
 
   observer.observe(container, {
     childList: true,
-    subtree: true
+    subtree: true,
+    // changes like style/width/height/display will be catched
+    attributes: true
   });
 
   function watch(mutations) {
@@ -215,6 +225,10 @@ function observeDOM(elements, container, cb) {
   }
 
   function knownNodes(mutation) {
-    return filter.call(mutation.addedNodes, isWatched).length > 0;
+    var nodes = concat.call([],
+      Array.prototype.slice.call(mutation.addedNodes),
+      mutation.target
+    );
+    return filter.call(nodes, isWatched).length > 0;
   }
 }
