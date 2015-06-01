@@ -71,11 +71,10 @@ var contains = global.document.documentElement.compareDocumentPosition ?
     };
 
 function createInViewport(container) {
-  var watches = [];
-  var watching = [];
+  var watches = createWatches();
 
   var scrollContainer = container === global.document.body ? global : container;
-  var debouncedCheck = debounce(checkElements, 15);
+  var debouncedCheck = debounce(watches.checkAll(isInViewport), 15);
 
   addEvent(scrollContainer, 'scroll', debouncedCheck);
 
@@ -84,7 +83,7 @@ function createInViewport(container) {
   }
 
   if (supportsMutationObserver) {
-    observeDOM(watching, container, debouncedCheck);
+    observeDOM(watches, container, debouncedCheck);
   }
 
   // failsafe check, every 200ms we check for visible images
@@ -97,14 +96,14 @@ function createInViewport(container) {
     var visible = isVisible(elt, offset);
     if (visible) {
       if (cb) {
-        watching.splice(indexOf.call(watching, elt), 1);
+        watches.remove(elt);
         cb(elt);
       }
       return true;
     }
 
     if (cb) {
-      setTimeout(addWatch(elt, offset, cb), 0);
+      setTimeout(watches.add(elt, offset, cb));
     }
 
     return false;
@@ -170,37 +169,59 @@ function createInViewport(container) {
     return visible;
   }
 
-  function addWatch(elt, offset, cb) {
-    if (indexOf.call(watching, elt) === -1) {
-      watching.push(elt);
-    }
-
-    return function () {
-      watches.push(function () {
-        isInViewport(elt, offset, cb);
-      });
-    };
-  }
-
-  function checkElements() {
-    var cb;
-    while (cb = watches.shift()) {
-      cb();
-    }
-  }
-
   return {
     container: container,
     isInViewport: isInViewport
   };
 }
 
-function indexOf(value) {
-  for (var i = this.length; i-- && this[i] !== value;) {}
-  return i;
+function createWatches() {
+  var watches = [];
+
+  function add(elt, offset, cb) {
+    if (indexOf(elt) === -1) {
+      watches.push([elt, offset, cb]);
+    }
+  }
+
+  function remove(elt) {
+    var pos = indexOf(elt);
+    if (pos !== -1) {
+      watches.splice(pos, 1);
+    }
+  }
+
+  function indexOf(elt) {
+    for (var i = watches.length - 1; i >= 0; i--) {
+      if (watches[i][0] == elt) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  function contains(elt) {
+    return indexOf(elt) !== -1;
+  }
+
+  function checkAll(cb) {
+    return function () {
+      var params;
+      for (var i = watches.length - 1; i >= 0; i--) {
+        cb.apply(this, watches[i]);
+      }
+    };
+  }
+
+  return {
+    add: add,
+    remove: remove,
+    contains: contains,
+    checkAll: checkAll
+  };
 }
 
-function observeDOM(elements, container, cb) {
+function observeDOM(watches, container, cb) {
   var observer = new MutationObserver(watch);
   var filter = Array.prototype.filter;
   var concat = Array.prototype.concat;
@@ -220,15 +241,11 @@ function observeDOM(elements, container, cb) {
     }
   }
 
-  function isWatched(node) {
-    return indexOf.call(elements, node) !== -1;
-  }
-
   function knownNodes(mutation) {
     var nodes = concat.call([],
       Array.prototype.slice.call(mutation.addedNodes),
       mutation.target
     );
-    return filter.call(nodes, isWatched).length > 0;
+    return filter.call(nodes, watches.contains).length > 0;
   }
 }
