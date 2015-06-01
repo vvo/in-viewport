@@ -1,4 +1,4 @@
-describe('asking if a visible div scrolled', function() {
+describe('using the watcher API to dispose and watch again', function() {
   require('./fixtures/bootstrap.js');
   beforeEach(h.clean);
   afterEach(h.clean);
