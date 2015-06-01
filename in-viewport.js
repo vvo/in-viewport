@@ -74,7 +74,7 @@ function createInViewport(container) {
   var watches = createWatches();
 
   var scrollContainer = container === global.document.body ? global : container;
-  var debouncedCheck = debounce(watches.checkAll(isInViewport), 15);
+  var debouncedCheck = debounce(watches.checkAll(watchInViewport), 15);
 
   addEvent(scrollContainer, 'scroll', debouncedCheck);
 
@@ -93,20 +93,35 @@ function createInViewport(container) {
   setInterval(debouncedCheck, 150);
 
   function isInViewport(elt, offset, cb) {
-    var visible = isVisible(elt, offset);
-    if (visible) {
-      if (cb) {
-        watches.remove(elt);
-        cb(elt);
-      }
-      return true;
+    if (!cb) {
+      return isVisible(elt, offset);
     }
 
-    if (cb) {
-      setTimeout(watches.add(elt, offset, cb));
+    var accessor = createAccessor(elt, offset, cb);
+    accessor.watch();
+    return accessor;
+  }
+
+  function createAccessor(elt, offset, cb) {
+    function watch() {
+      watches.add(elt, offset, cb);
     }
 
-    return false;
+    function dispose() {
+      watches.remove(elt);
+    }
+
+    return {
+      watch: watch,
+      dispose: dispose
+    }
+  }
+
+  function watchInViewport(elt, offset, cb) {
+    if (isVisible(elt, offset)) {
+      watches.remove(elt);
+      cb(elt);
+    }
   }
 
   function isVisible(elt, offset) {
@@ -179,9 +194,11 @@ function createWatches() {
   var watches = [];
 
   function add(elt, offset, cb) {
-    if (indexOf(elt) === -1) {
-      watches.push([elt, offset, cb]);
-    }
+    setTimeout(function() {
+      if (!contains(elt)) {
+        watches.push([elt, offset, cb])
+      }
+    }, 0);
   }
 
   function remove(elt) {

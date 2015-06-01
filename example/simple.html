@@ -23,7 +23,7 @@
   <script>
   var el = document.getElementById('test');
 
-  inViewport(el, function() {
+  var watcher = inViewport(el, function() {
     alert('YES');
   });
   </script>
