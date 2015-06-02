@@ -1,3 +1,9 @@
+# 3.4.0 (2015-06-03)
+
+  * feat: add a watcher.dispose()/.watch() API
+    Now you can remove a watched node or re-watch it anytime.
+    fixes #7
+
 # 3.2.0 (2015-05-24)
 
   * fix: children of hidden parents were not displayed, use a setInterval for this
