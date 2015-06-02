@@ -44,17 +44,19 @@ At any time you can rewatch or stop watching, by using the `watch` and ` dispose
 ```js
 var inViewport = require('in-viewport');
 var elem = document.getElementById('myFancyDiv');
-var count = 0; 
+var count = 0;
+var timer;
 
 var watcher = inViewport(elem, visible);
 
 function visible() {
   count++;
-  setTimeout(watcher.watch, 1000); 
+  timer = setTimeout(watcher.watch, 1000); 
 }
 
 setTimeout(function(){
   watcher.dispose();
+  clearTimeout(timer);
   alert('myfancyDiv was visible '+count+' seconds in the last 10 seconds!');
 }, 10000); 
 ```
