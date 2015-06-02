@@ -97,12 +97,12 @@ function createInViewport(container) {
       return isVisible(elt, offset);
     }
 
-    var accessor = createAccessor(elt, offset, cb);
-    accessor.watch();
-    return accessor;
+    var remote = createRemote(elt, offset, cb);
+    remote.watch();
+    return remote;
   }
 
-  function createAccessor(elt, offset, cb) {
+  function createRemote(elt, offset, cb) {
     function watch() {
       watches.add(elt, offset, cb);
     }
