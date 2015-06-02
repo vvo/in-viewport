@@ -3,11 +3,11 @@ describe('using the watcher API to dispose and watch again', function() {
   beforeEach(h.clean);
   afterEach(h.clean);
 
-  var visible = false;
   var element;
   var watcher;
+  var visible = false;
 
-  beforeEach(function(done) {
+  beforeEach(function() {
     element = h.createTest({
       style: {
         top: '10000px'
@@ -15,28 +15,31 @@ describe('using the watcher API to dispose and watch again', function() {
     });
     h.insertTest(element);
     watcher = inViewport(element, function() {
-      scrolled = true;
-      done();
+      visible = true;
     });
   });
-  
+
   describe('when the watcher is not active', function() {
-    beforeEach(watcher.dispose());
+    beforeEach(function() {
+      watcher.dispose();
+    });
     beforeEach(h.scroller(0, 10000));
     beforeEach(h.scroller(0, 0));
 
     it('cb not called', function() {
-      assert.strictEqual(calls.length, 0);
+      assert.strictEqual(visible, false);
     });
   });
 
   describe('when the watcher is active', function() {
-    beforeEach(watcher.watch());
+    beforeEach(function() {
+      watcher.watch();
+    });
     beforeEach(h.scroller(0, 10000));
     beforeEach(h.scroller(0, 0));
 
     it('cb called', function() {
-      assert.strictEqual(calls.length, 1);
+      assert.strictEqual(visible, true);
     });
   });
 });
