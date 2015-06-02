@@ -194,7 +194,7 @@ function createWatches() {
   var watches = [];
 
   function add(elt, offset, cb) {
-    setTimeout(function() {
+    setTimeout(function () {
       if (!contains(elt)) {
         watches.push([elt, offset, cb])
       }
