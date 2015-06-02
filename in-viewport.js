@@ -114,7 +114,7 @@ function createInViewport(container) {
     return {
       watch: watch,
       dispose: dispose
-    }
+    };
   }
 
   function watchInViewport(elt, offset, cb) {
@@ -195,8 +195,8 @@ function createWatches() {
 
   function add(elt, offset, cb) {
     setTimeout(function () {
-      if (!contains(elt)) {
-        watches.push([elt, offset, cb])
+      if (!isWatched(elt)) {
+        watches.push([elt, offset, cb]);
       }
     }, 0);
   }
@@ -210,20 +210,19 @@ function createWatches() {
 
   function indexOf(elt) {
     for (var i = watches.length - 1; i >= 0; i--) {
-      if (watches[i][0] == elt) {
+      if (watches[i][0] === elt) {
         return i;
       }
     }
     return -1;
   }
 
-  function contains(elt) {
+  function isWatched(elt) {
     return indexOf(elt) !== -1;
   }
 
   function checkAll(cb) {
     return function () {
-      var params;
       for (var i = watches.length - 1; i >= 0; i--) {
         cb.apply(this, watches[i]);
       }
@@ -233,7 +232,7 @@ function createWatches() {
   return {
     add: add,
     remove: remove,
-    contains: contains,
+    isWatched: isWatched,
     checkAll: checkAll
   };
 }
@@ -263,6 +262,6 @@ function observeDOM(watches, container, cb) {
       Array.prototype.slice.call(mutation.addedNodes),
       mutation.target
     );
-    return filter.call(nodes, watches.contains).length > 0;
+    return filter.call(nodes, watches.isWatched).length > 0;
   }
 }

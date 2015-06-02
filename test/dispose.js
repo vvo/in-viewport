@@ -7,7 +7,7 @@ describe('using the watcher API to dispose and watch again', function() {
   var watcher;
   var visible = false;
 
-  beforeEach(function() {
+  beforeEach(function(done) {
     element = h.createTest({
       style: {
         top: '10000px'
@@ -17,6 +17,8 @@ describe('using the watcher API to dispose and watch again', function() {
     watcher = inViewport(element, function() {
       visible = true;
     });
+    // let in-viewport add the node to his watches
+    setTimeout(done, 20);
   });
 
   describe('when the watcher is not active', function() {
