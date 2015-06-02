@@ -31,10 +31,35 @@ inViewport(elem, visible);
 
 function visible(elt) {
   // elt === elem
-  alert(elt.id + ' is visible in the window !');
+  alert(elt.id + ' is visible in the window!');
 }
 ```
 The first callback argument is always the `element` that entered the viewport.
+
+### callback watcher API
+
+The callback is called only one time, when the `element` is in the viewport for the first time.
+At any time you can rewatch or stop watching, by using the `watch` and ` dispose` API. 
+
+```js
+var inViewport = require('in-viewport');
+var elem = document.getElementById('myFancyDiv');
+var count = 0;
+var timer;
+
+var watcher = inViewport(elem, visible);
+
+function visible() {
+  count++;
+  timer = setTimeout(watcher.watch, 1000); 
+}
+
+setTimeout(function(){
+  watcher.dispose();
+  clearTimeout(timer);
+  alert('myfancyDiv was visible '+count+' seconds in the last 10 seconds!');
+}, 10000); 
+```
 
 ### A custom container
 
@@ -49,7 +74,7 @@ var elem = document.getElementById('myFancyDiv');
 inViewport(elem, { container: customContainer }, visible);
 
 function visible() {
-  alert('myfancyDiv is visible in the `customContainer` !');
+  alert('myfancyDiv is visible in the `customContainer`!');
 }
 ```
 
@@ -69,7 +94,7 @@ var elem = document.getElementById('myFancyDiv');
 inViewport(elem, { offset: 300 }, visible);
 
 function visible() {
-  alert('myfancyDiv is visible in the `customContainer` !');
+  alert('myfancyDiv is visible in the `customContainer`!');
 }
 ```
 
