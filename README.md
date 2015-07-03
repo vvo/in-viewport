@@ -119,7 +119,7 @@ in-viewport after inserting elements in the DOM.
 
 ## Use cases
 
-* Images, iframes, widgets [lazyloader](/vvo/lazyload)
+* Images, iframes, widgets [lazyloader](http://github.com/vvo/lazyload)
 * infinite scroll
 * loading widgets only when needed
 
