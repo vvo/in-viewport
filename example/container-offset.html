@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example with a custom container and an offset</title>
+
+  <style>
+    #container {
+      height: 150px;
+      margin: 50px;
+      border: 1px solid #000;
+      overflow: auto;
+    }
+    #wrapper {
+      padding: 0 2000px;
+    }
+    #test {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background: #000;
+    }
+    #test::before {
+      content: '';
+      position: absolute;
+      top: -500px;
+      left: -500px;
+      right: -500px;
+      bottom: -500px;
+      z-index: -1;
+      border: 1px dashed #666;
+      background: #F5F5F5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Custom container example with an offset</h1>
+
+  <div id="container">
+    <div id="wrapper">
+      <div id="test"></div>
+    </div>
+  </div>
+
+  <script src="../build/in-viewport.min.js"></script>
+  <script>
+  var container = document.getElementById('container');
+  var el = document.getElementById('test');
+
+  var watcher = inViewport(el, {container: container, offset: 500}, function() {
+    alert('in custom viewport, in 500px');
+  });
+  </script>
+</body>
+</html>

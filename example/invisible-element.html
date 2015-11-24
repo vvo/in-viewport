@@ -13,19 +13,18 @@
   </style>
 </head>
 <body>
-  <div class="context">Coucou</div>
+  <h1 class="context">Invisible element example</h1>
 
   <div class="hidden">
     <div class="test"></div>
   </div>
 
   <script src="../build/in-viewport.min.js"></script>
-
   <script>
   var el = document.querySelector('.test');
 
   inViewport(el, function() {
-    alert('YES');
+    alert('in viewport');
   });
   </script>
 </body>

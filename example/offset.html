@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example with offset</title>
+
+  <style>
+    #test {
+      position: relative;
+      top: 2000px;
+      width: 10px;
+      height: 10px;
+      background: #000;
+    }
+    #test:before {
+      content: '';
+      position: absolute;
+      top: -500px;
+      left: -500px;
+      right: -500px;
+      bottom: -500px;
+      z-index: -1;
+      border: 1px dashed #666;
+      background: #F5F5F5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Offset example</h1>
+
+  <div id="test"></div>
+
+  <script src="../build/in-viewport.min.js"></script>
+  <script>
+  var el = document.getElementById('test');
+
+  var watcher = inViewport(el, {offset: 500}, function() {
+    alert('in viewport, in 500px');
+  });
+  </script>
+</body>
+</html>

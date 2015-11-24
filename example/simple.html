@@ -5,7 +5,7 @@
 
   <style>
     #test {
-      position:relative;
+      position: relative;
       top: 2000px;
       width: 10px;
       height: 10px;
@@ -14,17 +14,16 @@
   </style>
 </head>
 <body>
+  <h1>Simple example</h1>
 
   <div id="test"></div>
-  <div>Coucou</div>
 
   <script src="../build/in-viewport.min.js"></script>
-
   <script>
   var el = document.getElementById('test');
 
   var watcher = inViewport(el, function() {
-    alert('YES');
+    alert('in viewport');
   });
   </script>
 </body>
