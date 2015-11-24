@@ -36,7 +36,7 @@ function visible(elt) {
 ```
 The first callback argument is always the `element` that entered the viewport.
 
-### callback watcher API
+### Callback watcher API
 
 The callback is called only one time, when the `element` is in the viewport for the first time.
 At any time you can rewatch or stop watching, by using the `watch` and ` dispose` API. 
@@ -158,7 +158,7 @@ Please consider using [browserify](https://github.com/substack/node-browserify).
 
 ## License
 
-Copyright (c) 2013 Vincent Voyer
+Copyright (c) 2013-2016 Vincent Voyer
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
