@@ -4,10 +4,10 @@ scripts:
   - build/in-viewport.min.js
 browsers:
   - name: chrome
-    version: 39..dev
+    version: -1..latest
     platform: Windows 2012 R2 # Win 8.1
   - name: firefox
-    version: 33..latest
+    version: -1..latest
     platform: Windows 2012 R2 # Win 8.1
   - name: ie
     version: 8..11
