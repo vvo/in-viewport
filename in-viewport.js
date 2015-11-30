@@ -177,11 +177,9 @@ function createWatches() {
   var watches = [];
 
   function add(elt, offset, cb) {
-    setTimeout(function () {
-      if (!isWatched(elt)) {
-        watches.push([elt, offset, cb]);
-      }
-    }, 0);
+    if (!isWatched(elt)) {
+      watches.push([elt, offset, cb]);
+    }
   }
 
   function remove(elt) {

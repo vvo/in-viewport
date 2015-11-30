@@ -27,7 +27,7 @@ describe('detached DOM node', function() {
       if (typeof MutationObserver === 'function') {
         describe('when the browser supports `MutationObserver`', function () {
 
-          beforeEach(h.wait(200));
+          beforeEach(h.wait(50));
 
           it('cb called', function() {
             assert.strictEqual(visible, true);
