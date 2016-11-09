@@ -1,7 +1,5 @@
 # inViewport [![devDependency Status](http://img.shields.io/david/dev/vvo/in-viewport.svg?style=flat-square)](https://david-dm.org/vvo/in-viewport#info=devDependencies)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vvo/in-viewport?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 Know when an element is in the window viewport or a custom viewport.
 
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/in-viewportvvo.svg)](https://saucelabs.com/u/in-viewportvvo)
