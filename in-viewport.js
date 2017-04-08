@@ -130,6 +130,10 @@ function createInViewport(container) {
   }
 
   function isVisible(elt, offset) {
+    if (!elt) {
+      return false;
+    }
+    
     if (!contains(global.document.documentElement, elt) || !contains(global.document.documentElement, container)) {
       return false;
     }
