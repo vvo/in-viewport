@@ -6,7 +6,9 @@ var supportsMutationObserver = typeof global.MutationObserver === 'function';
 function inViewport(elt, params, cb) {
   var opts = {
     container: global.document.body,
-    offset: 0
+    offset: 0,
+    debounce: 15,
+    failsafe: true
   };
 
   if (params === undefined || typeof params === 'function') {
@@ -16,15 +18,21 @@ function inViewport(elt, params, cb) {
 
   var container = opts.container = params.container || opts.container;
   var offset = opts.offset = params.offset || opts.offset;
+  var debounceValue = opts.debounce = params.debounce || opts.debounce;
+  var failsafe = opts.failsafe = params.failsafe || opts.failsafe;
 
   for (var i = 0; i < instances.length; i++) {
-    if (instances[i].container === container) {
+    if (
+      instances[i].container === container &&
+      instances[i]._debounce === debounceValue &&
+      instances[i]._failsafe === failsafe
+    ) {
       return instances[i].isInViewport(elt, offset, cb);
     }
   }
 
   return instances[
-    instances.push(createInViewport(container)) - 1
+    instances.push(createInViewport(container, debounceValue, failsafe)) - 1
   ].isInViewport(elt, offset, cb);
 }
 
@@ -75,11 +83,11 @@ var contains = function() {
       };
 }
 
-function createInViewport(container) {
+function createInViewport(container, debounceValue, failsafe) {
   var watches = createWatches();
 
   var scrollContainer = container === global.document.body ? global : container;
-  var debouncedCheck = debounce(watches.checkAll(watchInViewport), 15);
+  var debouncedCheck = debounce(watches.checkAll(watchInViewport), debounceValue);
 
   addEvent(scrollContainer, 'scroll', debouncedCheck);
 
@@ -95,7 +103,9 @@ function createInViewport(container) {
   // usecase: a hidden parent containing eleements
   // when the parent becomes visible, we have no event that the children
   // became visible
-  setInterval(debouncedCheck, 150);
+  if (failsafe) {
+    setInterval(debouncedCheck, 150);
+  }
 
   function isInViewport(elt, offset, cb) {
     if (!cb) {
@@ -133,7 +143,7 @@ function createInViewport(container) {
     if (!elt) {
       return false;
     }
-    
+
     if (!contains(global.document.documentElement, elt) || !contains(global.document.documentElement, container)) {
       return false;
     }
@@ -178,7 +188,9 @@ function createInViewport(container) {
 
   return {
     container: container,
-    isInViewport: isInViewport
+    isInViewport: isInViewport,
+    _debounce: debounceValue,
+    _failsafe: failsafe
   };
 }
 

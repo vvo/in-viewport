@@ -37,7 +37,7 @@ The first callback argument is always the `element` that entered the viewport.
 ### Callback watcher API
 
 The callback is called only one time, when the `element` is in the viewport for the first time.
-At any time you can rewatch or stop watching, by using the `watch` and ` dispose` API. 
+At any time you can rewatch or stop watching, by using the `watch` and ` dispose` API.
 
 ```js
 var inViewport = require('in-viewport');
@@ -49,14 +49,14 @@ var watcher = inViewport(elem, visible);
 
 function visible() {
   count++;
-  timer = setTimeout(watcher.watch, 1000); 
+  timer = setTimeout(watcher.watch, 1000);
 }
 
 setTimeout(function(){
   watcher.dispose();
   clearTimeout(timer);
   alert('myfancyDiv was visible '+count+' seconds in the last 10 seconds!');
-}, 10000); 
+}, 10000);
 ```
 
 ### A custom container
@@ -97,6 +97,42 @@ function visible() {
 ```
 
 When your element is near `300px` of the viewport, you get your callback / true result.
+
+### Specifying debounce wait value
+
+By default, debounce wait value is 15ms.
+
+You can change that with `debounce` param.
+
+```js
+var inViewport = require('in-viewport');
+var elem = document.getElementById('myFancyDiv');
+
+inViewport(elem, { debounce: 300 }, visible);
+
+function visible() {
+  alert('myfancyDiv is visible in the `customContainer`!');
+}
+```
+
+### Failsafe check
+
+By default, failsafe check with `setInterval` is performed every 150ms.
+
+Usecase: a hidden parent containing eleements; when the parent becomes visible, we have no event that the children became visible.
+
+If you don’t want to run that check constantly, turn it off with `failsafe` param.
+
+```js
+var inViewport = require('in-viewport');
+var elem = document.getElementById('myFancyDiv');
+
+inViewport(elem, { failsafe: false }, visible);
+
+function visible() {
+  alert('myfancyDiv is visible in the `customContainer`!');
+}
+```
 
 ### Dynamic element creation (document.createElement)
 
