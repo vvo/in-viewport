@@ -98,9 +98,9 @@ function visible() {
 
 When your element is near `300px` of the viewport, you get your callback / true result.
 
-### Specifying debounce wait value
+### Specifying debounce value
 
-By default, debounce wait value is 15ms.
+By default, debounce value for scroll and resize events is 15ms.
 
 You can change that with `debounce` param.
 
@@ -119,7 +119,7 @@ function visible() {
 
 By default, failsafe check with `setInterval` is performed every 150ms.
 
-Usecase: a hidden parent containing eleements; when the parent becomes visible, we have no event that the children became visible.
+Usecase: a hidden parent containing elements; when the parent becomes visible, we have no event that the children became visible.
 
 If you don’t want to run that check constantly, turn it off with `failsafe` param.
 
