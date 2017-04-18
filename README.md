@@ -117,7 +117,7 @@ function visible() {
 
 ### Failsafe check
 
-By default, failsafe check with `setInterval` is performed every 150ms.
+By default, inViewport does a failsafe to handle display manipulation that does not throw an event. It works with a `setInterval` performed every 150ms.
 
 Usecase: a hidden parent containing elements; when the parent becomes visible, we have no event that the children became visible.
 
