@@ -100,7 +100,7 @@ When your element is near `300px` of the viewport, you get your callback / true 
 
 ### Specifying debounce value
 
-By default, debounce value for scroll and resize events is 15ms.
+Currently, scroll and resize events are called every 15ms, but there are situations where larger value like 300ms is more sensible, e.g. image lazyload, where you probably want to wait for user to stop with scrolling before loading every image that comes into viewport.
 
 You can change that with `debounce` param.
 
@@ -119,9 +119,7 @@ function visible() {
 
 By default, inViewport does a failsafe to handle display manipulation that does not throw an event. It works with a `setInterval` performed every 150ms.
 
-Usecase: a hidden parent containing elements; when the parent becomes visible, we have no event that the children became visible.
-
-If you don’t want to run that check constantly, turn it off with `failsafe` param.
+One of the situations where this is useful is when you have a hidden parent containing elements; when the parent becomes visible, we have no event that the children became visible. If you handle cases like this by yourself in different part of your codebase (e.g. you have callback which is active when parent becomse visible), you can turn it off with `failsafe` param.
 
 ```js
 var inViewport = require('in-viewport');
