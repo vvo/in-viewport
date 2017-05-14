@@ -1,7 +1,12 @@
+# UNRELEASED
+
+  * feat: Add `debounce` and `failsafe` options. More details in
+  documentation, #27 and #28
+
 # 3.4.1 (2015-12-14)
 
   * fix: handle custom container with offset 06b295e7982912e84d8e8226c49c10c782408cba
-  * fix(setTimeout): no need to add nodes in a setTimeout it seems e614061ee307449b3d539fc33d2431b6afe5fb6c 
+  * fix(setTimeout): no need to add nodes in a setTimeout it seems e614061ee307449b3d539fc33d2431b6afe5fb6c
 
 # 3.4.0 (2015-06-03)
 
@@ -19,7 +24,7 @@
     fixes #9
 
 # 3.0.2 (2015-03-14)
-  
+
   * build with closure compiler
 
 # 1.0.1 (2015-01-25)
@@ -29,4 +34,3 @@
 # 1.0.0 (2015-01-25)
 
   * refactor using commonJS
-
