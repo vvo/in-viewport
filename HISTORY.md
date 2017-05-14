@@ -1,4 +1,4 @@
-# UNRELEASED
+# 3.5.0 (2017-05-14)
 
   * feat: Add `debounce` and `failsafe` options. More details in
   documentation, #27 and #28
