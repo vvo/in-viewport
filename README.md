@@ -37,7 +37,7 @@ The first callback argument is always the `element` that entered the viewport.
 ### Callback watcher API
 
 The callback is called only one time, when the `element` is in the viewport for the first time.
-At any time you can rewatch or stop watching, by using the `watch` and ` dispose` API. 
+At any time you can rewatch or stop watching, by using the `watch` and ` dispose` API.
 
 ```js
 var inViewport = require('in-viewport');
@@ -49,14 +49,14 @@ var watcher = inViewport(elem, visible);
 
 function visible() {
   count++;
-  timer = setTimeout(watcher.watch, 1000); 
+  timer = setTimeout(watcher.watch, 1000);
 }
 
 setTimeout(function(){
   watcher.dispose();
   clearTimeout(timer);
   alert('myfancyDiv was visible '+count+' seconds in the last 10 seconds!');
-}, 10000); 
+}, 10000);
 ```
 
 ### A custom container
@@ -97,6 +97,40 @@ function visible() {
 ```
 
 When your element is near `300px` of the viewport, you get your callback / true result.
+
+### Specifying debounce value
+
+Currently, scroll and resize events are called every 15ms, but there are situations where larger value like 300ms is more sensible, e.g. image lazyload, where you probably want to wait for user to stop with scrolling before loading every image that comes into viewport.
+
+You can change that with `debounce` param.
+
+```js
+var inViewport = require('in-viewport');
+var elem = document.getElementById('myFancyDiv');
+
+inViewport(elem, { debounce: 300 }, visible);
+
+function visible() {
+  alert('myfancyDiv is visible in the `customContainer`!');
+}
+```
+
+### Failsafe check
+
+By default, inViewport does a failsafe to handle display manipulation that does not throw an event. It works with a `setInterval` performed every 150ms.
+
+One of the situations where this is useful is when you have a hidden parent containing elements; when the parent becomes visible, we have no event that the children became visible. If you handle cases like this by yourself in different part of your codebase (e.g. you have callback which is active when parent becomse visible), you can turn it off with `failsafe` param.
+
+```js
+var inViewport = require('in-viewport');
+var elem = document.getElementById('myFancyDiv');
+
+inViewport(elem, { failsafe: false }, visible);
+
+function visible() {
+  alert('myfancyDiv is visible in the `customContainer`!');
+}
+```
 
 ### Dynamic element creation (document.createElement)
 
