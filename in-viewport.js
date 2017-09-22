@@ -8,7 +8,7 @@ function inViewport(elt, params, cb) {
     container: global.document.body,
     offset: 0,
     debounce: 15,
-    failsafe: true
+    failsafe: 150
   };
 
   if (params === undefined || typeof params === 'function') {
@@ -20,6 +20,18 @@ function inViewport(elt, params, cb) {
   var offset = opts.offset = params.offset || opts.offset;
   var debounceValue = opts.debounce = params.debounce || opts.debounce;
   var failsafe = opts.failsafe = params.failsafe || opts.failsafe;
+
+  // ensure backward compatibility with failsafe as boolean
+  if (failsafe === true) {
+    failsafe = 150;
+  } else if(failsafe === false) {
+    failsafe = 0;
+  }
+
+  // failsafe check always needs to be higher than debounceValue
+  if (failsafe > 0 && failsafe < debounceValue) {
+      failsafe = debounceValue + 50;
+  }
 
   for (var i = 0; i < instances.length; i++) {
     if (
@@ -99,12 +111,12 @@ function createInViewport(container, debounceValue, failsafe) {
     observeDOM(watches, container, debouncedCheck);
   }
 
-  // failsafe check, every 200ms we check for visible images
+  // failsafe check, every X we check for visible images
   // usecase: a hidden parent containing eleements
   // when the parent becomes visible, we have no event that the children
   // became visible
-  if (failsafe) {
-    setInterval(debouncedCheck, 150);
+  if (failsafe > 0) {
+    setInterval(debouncedCheck, failsafe);
   }
 
   function isInViewport(elt, offset, cb) {
