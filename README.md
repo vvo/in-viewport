@@ -1,3 +1,9 @@
+**NOTE FROM MAINTAINER:**
+
+This library is no more required nowadays, you can now rely on the Intersection Observer API which is available in all modern browsers: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+
+**/NOTE FROM MAINTAINER**
+
 # inViewport [![devDependency Status](http://img.shields.io/david/dev/vvo/in-viewport.svg?style=flat-square)](https://david-dm.org/vvo/in-viewport#info=devDependencies)
 
 Know when an element is in the window viewport or a custom viewport.
